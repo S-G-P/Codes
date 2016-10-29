@@ -1,0 +1,18 @@
+/Users/daisuke/.rbenv/versions/2.2.3/bin/ruby -r ./siteconf20161029-2596-9wwvg6.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+
+Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.
+
+
+
+make "DESTDIR="
+
+
+Agreeing to the Xcode/iOS license requires admin privileges, please re-run as root via sudo.
+
+
+
+make failed, exit code 69
