@@ -2,7 +2,7 @@
 
 <h1>Listing Schedules</h1>
 
-<table>
+<table class="table table-hover table-responsive">
   <thead>
     <tr>
       <th>Title</th>
@@ -17,14 +17,17 @@
   <tbody>
     <% @schedules.each do |schedule| %>
       <tr>
-        <td><%= schedule.title %></td>
-        <td><%= schedule.date_from %></td>
-        <td><%= schedule.date_to %></td>
-        <td><%= schedule.place %></td>
-        <td><%= schedule.content %></td>
-        <td><%= link_to 'Show', schedule %></td>
-        <td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
-        <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <div class="col-xs-12">
+          <td class="col-xs-6"><%= schedule.title %></td>
+          <td class="col-xs-2"><%= schedule.date_from %></td>
+          <td class="col-xs-2"><%= schedule.date_to %></td>
+          <div class="col-xs-2">
+            <td><%= link_to 'Show', schedule, class:"btn btn-primary" %></td>
+            <td><%= link_to 'Edit', edit_schedule_path(schedule) , class:"btn btn-success" %></td>
+            <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+          </div>
+          </td>
+        </div>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New Schedule', new_schedule_path %>
+<%= link_to 'New Schedule', new_schedule_path, class:"btn btn-success" %>
