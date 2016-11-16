@@ -13,4 +13,3 @@
  *= require_tree .
  *= require_self
  */
-html { font-size: calc(112.5% + 0.25vw) }
