@@ -15,6 +15,7 @@ class SchedulesController < ApplicationController
   # GET /schedules/new
   def new
     @schedule = Schedule.new
+    @schedule.schedule_users.build
   end
 
   # GET /schedules/1/edit
@@ -25,7 +26,6 @@ class SchedulesController < ApplicationController
   # POST /schedules.json
   def create
     @schedule = Schedule.new(schedule_params)
-
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
@@ -69,6 +69,6 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content)
+      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, schedule_users_attributes: [:schedules_users_id, published_at])
     end
 end

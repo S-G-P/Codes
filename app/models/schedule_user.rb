@@ -1,4 +1,4 @@
 class ScheduleUser < ActiveRecord::Base
   belongs_to :schedule
-  belongs_to :product
+  belongs_to :user
 end
