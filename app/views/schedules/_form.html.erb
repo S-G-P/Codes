@@ -31,12 +31,13 @@
     <%= f.label :content %><br>
     <%= f.text_area :content %>
   </div>
-  <%= form_for :schedule_users do |su| %>
-  <div class="field">
-    <%= su.label :schedule_id %><br>
-    <%= su.text_area :schedule_id %>
+  <div class="form-group">
+  <%= f.fields_for :schedule_user do |su| %>
+    <%= su.hidden_field :id %>
+    このタスクに招待するユーザIDを入力してください  <%= su.text_field :user_id , class: "form-control"%>
+  <% end %>    
   </div>
-  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
