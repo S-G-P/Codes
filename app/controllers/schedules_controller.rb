@@ -15,11 +15,16 @@ class SchedulesController < ApplicationController
   # GET /schedules/new
   def new
     @schedule = Schedule.new
-    @schedule.schedule_users.build
   end
 
   # GET /schedules/1/edit
   def edit
+    @users = User.all
+    @users.each do |user|
+      if @schedule.schedule_users.find_by(user_id: user.id).nil?
+        @schedule.schedule_users.build(user_id: user.id) #招待できるユーザIDを含めてオブジェクトを生成する
+      end
+    end
   end
 
   # POST /schedules
