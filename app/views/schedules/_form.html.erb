@@ -31,7 +31,25 @@
     <%= f.label :content %><br>
     <%= f.text_area :content %>
   </div>
+  <div class="field">
+  <%= f.fields_for :schedule_users do |su| %>
+    <% if @schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
+    未登録ユーザ
+      <%= User.find(su.object.user_id).name %>
+      <%= su.check_box :user_id, {include_hidden: false, checked: false}, su.object.user_id %>
+      <br>
+    <% else %>
+    登録済みユーザ          
+      <%= User.find(su.object.user_id).name %>
+      <%= su.hidden_field :id, value: su.object.id %>
+      <%= su.check_box :_destroy, {checked: true}, false, true %>
+      <br>
+    <% end %>
+  <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+  
 <% end %>

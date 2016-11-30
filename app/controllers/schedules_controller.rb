@@ -19,13 +19,18 @@ class SchedulesController < ApplicationController
 
   # GET /schedules/1/edit
   def edit
+    @users = User.all
+    @users.each do |user|
+      if @schedule.schedule_users.find_by(user_id: user.id).nil?
+        @schedule.schedule_users.build(user_id: user.id) #招待できるユーザIDを含めてオブジェクトを生成する
+      end
+    end
   end
 
   # POST /schedules
   # POST /schedules.json
   def create
     @schedule = Schedule.new(schedule_params)
-
     respond_to do |format|
       if @schedule.save
         format.html { redirect_to @schedule, notice: 'Schedule was successfully created.' }
@@ -69,6 +74,6 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content)
+      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, schedule_users_attributes: [:id, :schedule_id, :user_id])
     end
 end

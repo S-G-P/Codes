@@ -1,0 +1,2 @@
+module ScheduleUserHelper
+end

@@ -1,29 +1,30 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @schedule.title %>
-</p>
+<strong>タイトル</strong>
+<%= @schedule.title %><br>
 
-<p>
-  <strong>Date from:</strong>
-  <%= @schedule.date_from %>
-</p>
+<strong>日時</strong>
+<%= @schedule.date_from %> 〜 <%= @schedule.date_to %><br>
 
-<p>
-  <strong>Date to:</strong>
-  <%= @schedule.date_to %>
-</p>
+<strong>場所</strong>
+<%= @schedule.place %><br>
 
-<p>
-  <strong>Place:</strong>
-  <%= @schedule.place %>
-</p>
+<strong>内容</strong>
+<%= @schedule.content %><br>
 
-<p>
-  <strong>Content:</strong>
-  <%= @schedule.content %>
-</p>
+このタスクに招待したユーザーID(ScheduleUserテーブル)<br>
+<ul class="list-group">
+  <% @schedule.schedule_users.each do |su| %>
+    <li class="list-group-item"><%= su.user_id %></li>
+  <% end %>
+</ul>
+<div class="form-group">
+  <%= form_for ([@schedule, @schedule.schedule_users.build]) do |f| %>
+    <%= f.hidden_field :schedule_id %>
+    このタスクに招待するユーザIDを入力してください  <%= f.text_field :user_id , class: "form-control"%>
+    <%= f.submit "保存", class: "btn btn-primary"%>
+  <% end %>
+</div>
 
 <%= link_to 'Edit', edit_schedule_path(@schedule) %> |
 <%= link_to 'Back', schedules_path %>
