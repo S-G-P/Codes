@@ -37,6 +37,10 @@ gem 'twitter-bootstrap-rails' # Bootstrapの本体
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# カレンダー用のgem
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
