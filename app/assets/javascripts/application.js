@@ -17,10 +17,11 @@
 //= require fullcalendar
 //= require_tree .
 $(document).ready(showCalendar());
+
 function showCalendar() {
-  $.getJSON("https://sgp-gee-awa.c9users.io/schedules.json", function(json){
-    //alert("JSON Data: " + json[1].title);
-    console.log(json);
+  // JSONオブジェクトを取得
+  $.getJSON(window.location.href + ".json", function(json){
+    // fullCalendar表示のための初期設定
     $('#calendar').fullCalendar({
       // 初期表示ビュー
       defaultView: 'month',
@@ -37,39 +38,34 @@ function showCalendar() {
       dayClick: function(){
         alert('sample');
       },
-       // イベントソース
-      eventSources: [
-          {
-              events: [
-                  {
-                      title: 'event2',
-                      start: '2016-12-04',
-                      end: '2016-12-05'
-                  },
-                  {
-                      title: 'event3',
-                      start: '2016-12-05 12:30:00',
-                      allDay: false // will make the time show
-                  }
-              ]
-          }
-      ]
-    }); // calendar
+      eventClick: function(calEvent, jsEvent, view) {
+        window.location.href = window.location.href + "/" + calEvent.id;
+      },
+      eventMouseover: function( event, jsEvent, view ) { 
+        $(this).css('border-color', 'black');
+        $(this).css('border-width', '2px');
+        $(this).css("cursor","pointer");
+      },
+      eventMouseout: function( event, jsEvent, view ) { 
+        $(this).css('border-color', '#999999');
+        $(this).css('border-width', '0px');
+      }
+    });
+    // scheduleの情報をjson形式で配列に格納
     var json_array = [];
     $.each(json, function(index, val) {
       json_array.push(
         {
+          id: val.id,
           title: val.title,
           start: val.date_from,
-          end: val.date_to
+          end: val.date_to,
+          color: '#999999',     // an option!
+          textColor: 'white'  // an option!
         }
       )
-    }); //each
-
-    console.log(json_array);
-    // イベントを追加
+    });
+    // scheduleを追加
     $('#calendar').fullCalendar( 'addEventSource',json_array)
-    
-  }); //getjson
-} //function    
-
+  });
+} // -- showCalendar() end --
