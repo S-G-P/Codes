@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/calendar', to: 'calendar#show'
+
   resources :users
   resources :schedules do
     resources :schedule_users
