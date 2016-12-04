@@ -1,4 +1,7 @@
 <h1>Calendar#show</h1>
+<%= javascript_tag do %>
+  schedule.object = <%= raw @schedule.to_json %>;
+<% end %>
 <div id="calendar"></div>
   <div class='container'>
     # カレンダー(jquery)を表示する場所(id)を設置
