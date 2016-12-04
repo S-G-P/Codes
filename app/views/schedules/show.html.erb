@@ -12,19 +12,11 @@
 <strong>内容</strong>
 <%= @schedule.content %><br>
 
-このタスクに招待したユーザーID(ScheduleUserテーブル)<br>
-<ul class="list-group">
-  <% @schedule.schedule_users.each do |su| %>
-    <li class="list-group-item"><%= su.user_id %></li>
-  <% end %>
-</ul>
-<div class="form-group">
-  <%= form_for ([@schedule, @schedule.schedule_users.build]) do |f| %>
-    <%= f.hidden_field :schedule_id %>
-    このタスクに招待するユーザIDを入力してください  <%= f.text_field :user_id , class: "form-control"%>
-    <%= f.submit "保存", class: "btn btn-primary"%>
-  <% end %>
-</div>
+<strong>登録済みユーザ</strong>
+<% @schedule.users.each do |user| %>
+  <%= user.name %>
+<% end %>
+<br>
 
 <%= link_to 'Edit', edit_schedule_path(@schedule) %>
 <%= link_to 'Back', schedules_path %>
