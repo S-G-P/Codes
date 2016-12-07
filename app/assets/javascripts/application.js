@@ -16,6 +16,7 @@
 //= require moment
 //= require fullcalendar
 //= require_tree .
+
 $(document).ready(showCalendar());
 
 function showCalendar() {
