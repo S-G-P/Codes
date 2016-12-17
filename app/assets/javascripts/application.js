@@ -19,6 +19,16 @@
 
 $(document).ready(showCalendar());
 
+var windowWidth = $(window).width();
+var windowSm = 640;
+if (windowWidth <= windowSm) {
+    //横幅640px以下のとき（つまりスマホ時）に行う処理を書く
+    responsiveHeight = 650;    
+} else {
+    //横幅640px超のとき（タブレット、PC）に行う処理を書く
+    responsiveHeight = 900;
+}
+
 function showCalendar() {
   // JSONオブジェクトを取得
   $.getJSON(window.location.href + ".json", function(json){
@@ -36,6 +46,7 @@ function showCalendar() {
       dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
       // 曜日略称
       dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
+      height: responsiveHeight,
       dayClick: function(){
         alert('sample');
       },
