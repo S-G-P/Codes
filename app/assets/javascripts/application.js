@@ -24,6 +24,11 @@ function showCalendar() {
   $.getJSON(window.location.href + ".json", function(json){
     // fullCalendar表示のための初期設定
     $('#calendar').fullCalendar({
+      eventRender : function(event, eventElement) {
+        if (event.imageurl) {
+          eventElement.find("div.fc-content").prepend("<img src='" + event.imageurl +"' width='20' height='20'>");
+        }
+      },
       // 初期表示ビュー
       defaultView: 'month',
       // 土曜、日曜を表示
@@ -62,11 +67,17 @@ function showCalendar() {
           start: val.date_from,
           end: val.date_to,
           color: '#999999',     // an option!
-          textColor: 'white'  // an option!
+          textColor: 'white',  // an option!
         }
       )
     });
     // scheduleを追加
-    $('#calendar').fullCalendar( 'addEventSource',json_array)
-  });
+    $('#calendar').fullCalendar( 'addEventSource',json_array);
+    $('#calendar').fullCalendar( 'addEventSource', [{
+                start: Date.now(),
+                imageurl: "http://openweathermap.org/img/w/01n.png",
+                color: "#fcf8e3",
+                textColor: "#fcf8e3"
+        }]);
+    });
 } // -- showCalendar() end --

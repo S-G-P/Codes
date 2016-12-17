@@ -1,7 +1,23 @@
 <p id="notice"><%= notice %></p>
-<%= javascript_tag do %>
-  schedule = <%= raw @schedule.to_json %>;
-<% end %>
+<div class="col-lg-8">
+  <%= javascript_tag do %>
+    schedule = <%= raw @schedule.to_json %>;
+    weather = <%= raw @Weathers.to_json %>;
+  <% end %>
+<div>
+<div class="col-lg-12">
+  --天気情報-<br>
+  <p>
+    場所:<%= @Weathers["city"]["name"] %><br />
+    <% for i in 0..1 %>
+    年月:<%= @Weathers["list"][i]["dt_txt"].to_time.in_time_zone('Tokyo') %><br />
+    天気:<%= @Weathers["list"][i]["weather"][0]["main"] %><br />
+    アイコン: <% icon =  @Weathers["list"][i]["weather"][0]["icon"] %>
+              <%= image_tag("http://openweathermap.org/img/w/" + icon + ".png", width: "40px") %><br />
+    気温:<%= (@Weathers["list"][i]["main"]["temp"] - 273.15).round %>℃<br />
+    <% end %>
+  </p>
+</div>
 <div class="container-fluid">
   <div id="calendar">
     <div class='container'>
@@ -10,23 +26,23 @@
   <div class="row">
     <div class="col-lg-8">
       <h1>Listing Schedules</h1>
-      <table class="table table-hover table-responsive">
+      <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
         <thead>
           <tr>
-            <th class="col-xs-6 col-lg-6">タイトル</th>
-            <th class="col-xs-5 col-lg-4">開始日時</th>
-            <div class="col-xs-1 col-lg-2">
-              <th colspan="3"></th>
+            <th class="mdl-data-table__cell--non-numeric">タイトル</th>
+            <th class="mdl-data-table__cell--non-numeric">開始日時</th>
+            <div>
+              <th colspan="3" class="mdl-data-table__cell--non-numeric"></th>
             </div>
           </tr>
         </thead>
         <tbody>
           <% @schedules.each do |schedule| %>
             <tr data-href=<%= schedule_path(schedule) %> style="cursor:pointer">
-              <td><%= schedule.title %></td>
-              <td><%= schedule.date_from %></td>
-              <td><%= link_to 'Edit', edit_schedule_path(schedule) , class:"btn btn-success" %></td>
-              <td><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
+              <td class="mdl-data-table__cell--non-numeric"><%= schedule.title %></td>
+              <td class="mdl-data-table__cell--non-numeric"><%= schedule.date_from %></td>
+              <td class="mdl-data-table__cell--non-numeric"><%= link_to 'Edit', edit_schedule_path(schedule) , class:"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" %></td>
+              <td class="mdl-data-table__cell--non-numeric"><%= link_to 'Destroy', schedule, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %></td>
               </td>
             </tr>
           <% end %>
