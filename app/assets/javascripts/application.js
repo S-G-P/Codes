@@ -21,9 +21,14 @@ $(document).ready(showCalendar());
 
 var windowWidth = $(window).width();
 var windowSm = 640;
+// カレンダーの高さをレスポンシブ対応
+var responsiveHeight;
+// 時間を表示するか
+var isDisplayEventTime = true;
 if (windowWidth <= windowSm) {
     //横幅640px以下のとき（つまりスマホ時）に行う処理を書く
     responsiveHeight = 650;    
+    isDisplayEventTime = false;
 } else {
     //横幅640px超のとき（タブレット、PC）に行う処理を書く
     responsiveHeight = 900;
@@ -34,6 +39,8 @@ function showCalendar() {
   $.getJSON(window.location.href + ".json", function(json){
     // fullCalendar表示のための初期設定
     $('#calendar').fullCalendar({
+      // 時刻を表示しない
+      displayEventTime: isDisplayEventTime,
       // 初期表示ビュー
       defaultView: 'month',
       // 土曜、日曜を表示
