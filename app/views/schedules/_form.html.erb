@@ -1,8 +1,7 @@
-<%= form_for(@schedule) do |f| %>
+<%= form_for(@schedule, html: {class: "form-horizontal", style: "margin-bottom:15px;"}) do |f| %>
   <% if @schedule.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>
-
       <ul>
       <% @schedule.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,46 +9,67 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">  
+    <%= f.label :title, class: "control-label col-sm-2", for: "title"%>
+    <div class="col-sm-6">
+      <%= f.text_field :title, class: "form-control", placeholder: "タイトル"%>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :date_from %><br>
-    <%= f.datetime_select :date_from %>
+  <div class="form-group">      
+    <div class="field">
+      <%= f.label :date_from, class: "control-label col-sm-2" %>
+      <div class="col-sm-6">
+        <%= f.datetime_select :date_from %>
+      </div>
+    </div>
+  </div>    
+  <div class="form-group">          
+    <div class="field">
+      <%= f.label :date_to, class: "control-label col-sm-2" %>
+      <div class="col-sm-6">
+        <%= f.datetime_select :date_to %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :date_to %><br>
-    <%= f.datetime_select :date_to %>
+  <div class="form-group">          
+    <div class="field">
+      <%= f.label :place, class: "control-label col-sm-2", for: "place" %>
+      <div class="col-sm-6">
+        <%= f.text_field :place, class: "form-control", placeholder: "場所"  %>
+      </div>        
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
+  <div class="form-group">    
+    <div class="field">
+      <%= f.label :content, class: "control-label col-sm-2", for: "content"  %>
+      <div class="col-sm-6">      
+        <%= f.text_area :content, class: "form-control", placeholder: "スケジュールの内容"  %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :content %><br>
-    <%= f.text_area :content %>
+  <div class="form-group">    
+    <div class="field">
+      <div class="control-label col-sm-2">
+      </div>        
+      <div class="col-sm-6">
+        <%= f.fields_for :schedule_users do |su| %>
+          <% if @schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
+          未登録ユーザ
+            <%= User.find(su.object.user_id).name %>
+            <%= su.check_box :user_id, {include_hidden: false, checked: false}, su.object.user_id %>
+            <br>
+          <% else %>
+          登録済みユーザ
+            <%= User.find(su.object.user_id).name %>
+            <%= su.hidden_field :id, value: su.object.id %>
+            <%= su.check_box :_destroy, {checked: true}, false, true %>
+            <br>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-  <div class="field">
-  <%= f.fields_for :schedule_users do |su| %>
-    <% if @schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
-    未登録ユーザ
-      <%= User.find(su.object.user_id).name %>
-      <%= su.check_box :user_id, {include_hidden: false, checked: false}, su.object.user_id %>
-      <br>
-    <% else %>
-    登録済みユーザ          
-      <%= User.find(su.object.user_id).name %>
-      <%= su.hidden_field :id, value: su.object.id %>
-      <%= su.check_box :_destroy, {checked: true}, false, true %>
-      <br>
-    <% end %>
-  <% end %>
+  <div class="col-sm-offset-2">
+    <%= f.submit value: "作成", class: "btn btn-primary"%>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  
 <% end %>

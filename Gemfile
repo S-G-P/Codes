@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use SCSS for stylesheets
@@ -31,12 +30,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'hirb'
 gem 'hirb-unicode' # => HirbのUnicode対応版。日本語が入っていても結果がずれないようになります。
 
+# Turbolinksを起動させないためのgem
+gem 'jquery-turbolinks'
+
 gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
 gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
 gem 'twitter-bootstrap-rails' # Bootstrapの本体
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+# カレンダー用のgem
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
