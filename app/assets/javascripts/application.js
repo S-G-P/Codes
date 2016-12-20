@@ -12,6 +12,7 @@
 //$(window).unload(function(){});
 //= require jquery
 //= require jquery_ujs
+//= require material
 //= require moment
 //= require fullcalendar
 //= require_tree .
