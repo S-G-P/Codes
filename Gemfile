@@ -34,8 +34,6 @@ gem 'hirb-unicode' # => HirbのUnicode対応版。日本語が入っていても
 gem 'jquery-turbolinks'
 
 gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
-gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
-gem 'twitter-bootstrap-rails' # Bootstrapの本体
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
