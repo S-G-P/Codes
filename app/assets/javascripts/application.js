@@ -12,6 +12,7 @@
 //$(window).unload(function(){});
 //= require jquery
 //= require jquery_ujs
+//= require material
 //= require twitter/bootstrap
 //= require moment
 //= require fullcalendar
