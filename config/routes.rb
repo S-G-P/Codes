@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :todo_lists
   get '/', to: redirect('schedules')
   
   resources :users

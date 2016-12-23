@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Todo Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Delete flg</th>
+      <th>User</th>
+      <th>Created by</th>
+      <th>Deadline</th>
+      <th>Remind</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todo_lists.each do |todo_list| %>
+      <tr>
+        <td><%= todo_list.title %></td>
+        <td><%= todo_list.content %></td>
+        <td><%= todo_list.delete_flg %></td>
+        <td><%= todo_list.user_id %></td>
+        <td><%= todo_list.created_by %></td>
+        <td><%= todo_list.deadline %></td>
+        <td><%= todo_list.remind %></td>
+        <td><%= link_to 'Show', todo_list %></td>
+        <td><%= link_to 'Edit', edit_todo_list_path(todo_list) %></td>
+        <td><%= link_to 'Destroy', todo_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Todo list', new_todo_list_path %>
