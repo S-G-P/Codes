@@ -1,31 +1,3 @@
-  <!-- Wide card with share menu button -->
-  <style>
-  .fixed {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10000;
-  }
-  .demo-card-wide.mdl-card {
-    width: 100%;
-  }
-  .demo-card-wide > .mdl-card__title {
-    color: white;
-    height: 120px;
-    background: url('/assets/cards-sample.jpg') center / cover;
-  }
-  .demo-card-wide > .mdl-card__menu {
-    color: #fff;
-  }
-  .left_body {
-    background-color: white;
-  }
-  .right_body {
-    background-color: white;
-  }
-
-  </style>
-
 <p id="notice"><%= notice %></p>
 <%= javascript_tag do %>
   schedule = <%= raw @schedule.to_json %>;
@@ -35,7 +7,7 @@
     <div class='container'>
     </div>
   </div>
-  <h1>Listing Schedules</h1>
+  
   <!-- スケジュールをカードで並べて表示 -->
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--10-col">
