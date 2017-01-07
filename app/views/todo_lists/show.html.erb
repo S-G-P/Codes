@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @todo_list.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @todo_list.content %>
+</p>
+
+<p>
+  <strong>Delete flg:</strong>
+  <%= @todo_list.delete_flg %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @todo_list.user_id %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @todo_list.created_by %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @todo_list.deadline %>
+</p>
+
+<p>
+  <strong>Remind:</strong>
+  <%= @todo_list.remind %>
+</p>
+
+<%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
+<%= link_to 'Back', todo_lists_path %>
