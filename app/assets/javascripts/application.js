@@ -18,28 +18,16 @@
 
 $(document).ready(showCalendar());
 
-var windowWidth = $(window).width();
-var windowSm = 640;
-// カレンダーの高さをレスポンシブ対応
-var responsiveHeight;
-// 時間を表示するか
-var isDisplayEventTime = true;
-if (windowWidth <= windowSm) {
-    //横幅640px以下のとき（つまりスマホ時）に行う処理を書く
-    responsiveHeight = 650;    
-    isDisplayEventTime = false;
-} else {
-    //横幅640px超のとき（タブレット、PC）に行う処理を書く
-    responsiveHeight = 900;
-}
-
 function showCalendar() {
   // JSONオブジェクトを取得
   $.getJSON(window.location.href + ".json", function(json){
     // fullCalendar表示のための初期設定
     $('#calendar').fullCalendar({
-      // 時刻を表示しない
-      displayEventTime: isDisplayEventTime,
+      eventRender : function(event, eventElement) {
+        if (event.imageurl) {
+          eventElement.find("div.fc-content").prepend("<img src='" + event.imageurl +"' width='20' height='20'>");
+        }
+      },
       // 初期表示ビュー
       defaultView: 'month',
       // 土曜、日曜を表示
@@ -52,7 +40,6 @@ function showCalendar() {
       dayNames: ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'],
       // 曜日略称
       dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
-      height: responsiveHeight,
       dayClick: function(){
         alert('sample');
       },
@@ -79,11 +66,15 @@ function showCalendar() {
           start: val.date_from,
           end: val.date_to,
           color: '#999999',     // an option!
-          textColor: 'white'  // an option!
+          textColor: 'white',  // an option!
         }
       )
     });
     // scheduleを追加
-    $('#calendar').fullCalendar( 'addEventSource',json_array)
-  });
+    $('#calendar').fullCalendar( 'addEventSource',json_array);
+    $('#calendar').fullCalendar( 'addEventSource', [{
+                title: "<img src='http://openweathermap.org/img/w/01n.png'></i>",
+                start: Date.now(),
+        }]);
+    });
 } // -- showCalendar() end --
