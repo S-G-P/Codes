@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+
+  devise_for :users
+  get 'home/index'
+  root 'home#index'
+
   resources :todo_lists
-  get '/', to: redirect('schedules')
+#  get '/', to: redirect('schedules')
   
   resources :users
   resources :schedules do
