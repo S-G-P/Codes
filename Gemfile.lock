@@ -219,7 +219,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  less-rails
   material_design_lite-rails (~> 1.2)
   momentjs-rails
   pg (= 0.17.1)
