@@ -11,11 +11,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="mdl-textfield mdl-js-textfield ">
+    <%= f.label :name, class: 'mdl-textfield__label' %><br>
+    <%= f.text_field :name, class: 'mdl-textfield__input' %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: "mdl-button mdl-js-button mdl-button--raised" %>
   </div>
 <% end %>
