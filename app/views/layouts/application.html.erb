@@ -20,9 +20,11 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation mdl-layout--large-screen-only">
-          <%= link_to "CALENDAR", schedules_path , class: "mdl-navigation__link"%>
+          <%= link_to schedules_path, class: "mdl-navigation__link" do %>
+            <i class="material-icons">date_range</i>
+          <% end %>
           <%= link_to "USER", users_path , class: "mdl-navigation__link"%>
-          <%= link_to "TODO", todo_lists_path , class: "mdl-navigation__link"%>          
+          <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>          
         </nav>
       </div>
     </header>
@@ -31,7 +33,7 @@
       <nav class="mdl-navigation">
         <%= link_to "CALENDAR", schedules_path , class: "mdl-navigation__link"%>
         <%= link_to "USER", users_path , class: "mdl-navigation__link"%>
-        <%= link_to "TODO", todo_lists_path , class: "mdl-navigation__link"%>          
+        <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>
       </nav>
     </div>
     <main class="mdl-layout__content">
