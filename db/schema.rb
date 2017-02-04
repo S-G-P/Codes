@@ -13,14 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20170109032452) do
 
-  create_table "events", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "schedule_users", force: :cascade do |t|
     t.integer  "schedule_id"
     t.integer  "user_id"

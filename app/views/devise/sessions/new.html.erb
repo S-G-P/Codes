@@ -1,26 +1,32 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|%>
+  <div class="mdl-grid">
+    <h2 class="mdl-cell mdl-cell--12-col">ログイン</h2>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+      <%= f.label :email, class: 'mdl-textfield__label'%>
+      <%= f.text_field :email, class: 'mdl-textfield__input', autofocus: true %>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+      <%= f.label :password, class: 'mdl-textfield__label' %>
+      <%= f.password_field :password, class: 'mdl-textfield__input' %>
+    </div>
+    
+    </div>
+    <% if devise_mapping.rememberable? %>
+      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-textfield--floating-label mdl-cell mdl-cell--8-col" for="checkbox">
+        <%= f.check_box :remember_me, class: "mdl-checkbox__input"%>
+        <%= f.label :remember_me, class: "mdl-checkbox__label", rows: "3" %>
+      </label>
+    <% end -%>
+    
+    <div class="actions">
+      <%= f.submit "Log in", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-cell mdl-cell--8-col" %>
+    </div>
+    <%= render "devise/shared/links" %> 
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+
+
+
+

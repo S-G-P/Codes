@@ -15,3 +15,22 @@
  *= require_self
  *= require material
  */
+
+ #content {
+  display: block;
+  position: relative;
+}
+
+.card {
+  display: block;
+  position: relative;
+  width: 80%;
+  height: 100px;
+  border: 1px solid #1BBBFB;
+  -webkit-border-radius: 4px; 
+  -moz-border-radius: 4px;   
+  border-radius: 4px;
+  background-color: #fff;
+  margin: 16px auto;
+  padding: 24px;
+}

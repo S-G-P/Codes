@@ -1,27 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="mdl-grid">
+  <p class="mdl-cell mdl-cell--12-col" id="notice"><%= notice %></p>
+  
+  <h1 class="mdl-cell mdl-cell--12-col">ユーザ一覧</h1>
+</div>
 
-<h1>Listing Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
+<div class="mdl-grid">
+  <p class="mdl-cell mdl-cell--11-col">名前</p>
+  <% @users.each do |user| %>
+    <div class="mdl-cell mdl-cell--12-col">
+      <%= link_to user.name, user %>
+      <%= link_to user, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="material-icons">delete</i>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+  
+<div class="mdl-grid">
+  <%= link_to '新規ユーザ', new_user_path, class: "mdl-button mdl-js-button mdl-button--raised mdl-cell" %>
+</div>

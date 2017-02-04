@@ -1,13 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="mdl-grid">
+  <h1 class="mdl-cell mdl-cell--12-col">ユーザ情報</h1>
+  <p class="mdl-cell mdl-cell--8-col", id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-<p>
-  <strong>email:</strong>
-  <%= @user.email %>
-</p>
+  <p class="mdl-cell mdl-cell--8-col">
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
+  <p class="mdl-cell mdl-cell--12-col">
+    <strong>email:</strong>
+    <%= @user.email %>
+  </p>
+  
+  <%= link_to 'Edit', edit_user_path(@user), class: "mdl-button mdl-js-button mdl-button--raised mdl-cell mdl-cell--8-col" %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <%= link_to users_path, class: "mdl-cell mdl-cell--8-col" do %>
+    <i class="material-icons">arrow_back</i>
+  <% end %>
+</div>
