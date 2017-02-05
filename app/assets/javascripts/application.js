@@ -82,7 +82,7 @@ function showCalendar() {
 
         jqXHR = $.ajax({
           async: true,
-          url: "https://s-g-p-sakaidamasaru.c9users.io/schedules/" + event.id,
+          url: window.location.href + "/" + event.id,
           type: "PUT",
           data: {
             "schedule[date_from(1i)]": scheduleNewYear,
