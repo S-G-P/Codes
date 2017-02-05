@@ -1,5 +1,5 @@
 class CalendarController < ApplicationController
-  def index
+  def show
      @schedules = Schedule.all
   end
 end
