@@ -80,6 +80,7 @@ function showCalendar() {
         var scheduleNewMinute = scheduleStart[4];
         var scheduleNewSecound = scheduleStart[5];
 
+
         jqXHR = $.ajax({
           async: true,
           url: window.location.href + "/" + event.id,
