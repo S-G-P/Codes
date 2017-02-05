@@ -58,7 +58,7 @@ function showCalendar() {
         alert('sample');
       },
       eventClick: function(calEvent, jsEvent, view) {
-        window.location.href = window.location.href + "/" + calEvent.id;
+        window.location.href = window.location.href.replace( /calendar/g , "schedules" ) + "/" + calEvent.id;
       },
       eventMouseover: function( event, jsEvent, view ) { 
         $(this).css('border-color', 'black');
