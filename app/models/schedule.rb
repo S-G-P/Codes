@@ -4,5 +4,5 @@ class Schedule < ActiveRecord::Base
   accepts_nested_attributes_for :schedule_users, allow_destroy: true
 
   # throughオプションによりschedule_users経由でusersにアクセスできるようになる
-  # 具体的には、schedule.usersでユーザーにアクセスができる
+  # 具体的には、schedule.usersでうユーザーにアクセスができる
 end
