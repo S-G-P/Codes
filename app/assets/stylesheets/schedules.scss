@@ -1,3 +1,96 @@
 // Place all the styles related to the schedules controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hide-accessible, .hide-text {
+    position: absolute!important;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px,1px,1px,1px);
+}
+
+.menu--floating {
+  bottom: 0;
+  position: fixed;  
+  margin: 1em;
+  right: 0;
+  z-index: 2;
+}
+
+.menu--floating__action_main {
+    background-color: rgb(255,82,82);
+}
+
+.menu--floating__action {
+    
+  i {
+    position: relative;
+    top: 13px;
+    
+  }
+  
+  &:before { 
+    bottom: 25%;
+    color: #444;
+    content: attr(title);
+    font-size: 14px;
+    line-height: 1;
+    opacity: 0;
+    padding: .25em 1em;
+    position: absolute;
+    right: 100%;
+    text-align: left;
+    transition: all .2s ease-out .5s;
+    white-space: nowrap;
+  }
+  
+  &:last-child {
+    &:before {
+      font-size: 16px;
+    }
+  }
+  
+  background-color: #aaa;
+  box-shadow: 0px 2px 5px -2px rgba(0, 0, 0, 0.16), 0px 2px 10px -4px rgba(0, 0, 0, 0.12);
+  border-radius: 50%;
+  color: white;
+  display: block;
+  height: 56px;  
+  line-height: 3;
+  margin: 20px auto 0;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: all .2s ease-out;
+  width: 56px;
+  
+  &:active, &:focus, &:hover {
+    box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px -7px rgba(0, 0, 0, 0.15);
+  }
+  
+  &:not( :last-child ) {
+    height: 44px;    
+    line-height: 2.5;
+    opacity: 0;
+    transform: translateY(50px);
+    width: 44px;
+
+    @for $i from 1 through 6 {
+      &:nth-last-child(#{$i}) {
+        transition-delay: $i * 100ms;
+      }
+    }
+  }
+}
+
+.menu--floating:hover, .menu--floating--open {
+  
+  .menu--floating__action {
+    opacity: 1; 
+    transform: none;
+    
+    &:before {
+      opacity: 1;
+    }
+  }
+  
+}
