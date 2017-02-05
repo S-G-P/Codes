@@ -1,4 +1,17 @@
 <p id="notice"><%= notice %></p>
+
+<nav class="menu menu--floating"  role="navigation">    
+  <a href="#" class="menu--floating__action" title="Option"><span class="hide-accessible">Option</span></a>
+  <a href="#" class="menu--floating__action" title="Option"><span class="hide-accessible">Option</span></a>
+  <a href="#" class="menu--floating__action" title="Option"><span class="hide-accessible">Option</span></a>
+  <%= link_to new_schedule_path, class:"menu--floating__action menu--floating__action_main" do %>
+    <i class="material-icons">add</i>
+  <% end %>
+</nav>
+
+<%= javascript_tag do %>
+  schedule = <%= raw @schedule.to_json %>;
+<% end %>
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-8">
@@ -14,9 +27,6 @@
           </div>
         <% end %>
       </div>
-      <%= link_to new_schedule_path, class:"mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored" do %>
-        <i class="material-icons">add</i>
-      <% end %>
     </div>
     <div class="col-lg-4">
       サイドバー<br>
