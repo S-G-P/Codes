@@ -68,7 +68,8 @@ function showCalendar() {
       eventMouseout: function( event, jsEvent, view ) { 
         $(this).css('border-color', '#999999');
         $(this).css('border-width', '0px');
-      }
+      },
+      editable: true
     });
     // scheduleの情報をjson形式で配列に格納
     var json_array = [];

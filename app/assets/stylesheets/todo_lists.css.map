@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAOA,gBAAiB;EACf,KAAK,EAJM,IAAI;EAKf,MAAM,EAJM,GAAG",
+"sources": ["todo_lists.scss"],
+"names": [],
+"file": "todo_lists.css"
+}
