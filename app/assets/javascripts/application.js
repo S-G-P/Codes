@@ -12,7 +12,6 @@
 //$(window).unload(function(){});
 //= require jquery
 //= require jquery_ujs
-//= require material
 //= require moment
 //= require fullcalendar
 //= require_tree .
@@ -68,6 +67,34 @@ function showCalendar() {
       eventMouseout: function( event, jsEvent, view ) { 
         $(this).css('border-color', '#999999');
         $(this).css('border-width', '0px');
+      },
+      editable: true,
+      eventDrop: function(event, delta, revertFunc) {
+        // 変更先の日付を配列で取得
+        var scheduleStart = event.start.toArray();
+        // 各配列の値を変数に格納
+        var scheduleNewYear = scheduleStart[0];
+        var scheduleNewMonth = scheduleStart[1] + 1;
+        var scheduleNewDay = scheduleStart[2];
+        var scheduleNewHour = scheduleStart[3];
+        var scheduleNewMinute = scheduleStart[4];
+        var scheduleNewSecound = scheduleStart[5];
+
+        jqXHR = $.ajax({
+          async: true,
+          url: window.location.href + "/" + event.id,
+          type: "PUT",
+          data: {
+            "schedule[date_from(1i)]": scheduleNewYear,
+            "schedule[date_from(2i)]": scheduleNewMonth,
+            "schedule[date_from(3i)]": scheduleNewDay,
+            "schedule[date_from(4i)]": scheduleNewHour,
+            "schedule[date_from(5i)]": scheduleNewMinute,
+            "schedule[date_from(6i)]": scheduleNewSecound
+          },
+          dataType: 'json',
+          cache: false
+        })
       }
     });
     // scheduleの情報をjson形式で配列に格納
@@ -88,3 +115,4 @@ function showCalendar() {
     $('#calendar').fullCalendar( 'addEventSource',json_array)
   });
 } // -- showCalendar() end --
+
