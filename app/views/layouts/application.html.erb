@@ -20,11 +20,14 @@
         <div class="mdl-layout-spacer"></div>
         <!-- Navigation. We hide it in small screens. -->
         <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <%= link_to calendar_index_path, class: "mdl-navigation__link" do %>
+            <i class="material-icons">event</i>
+          <% end %>
           <%= link_to schedules_path, class: "mdl-navigation__link" do %>
-            <i class="material-icons">date_range</i>
+            <i class="material-icons">assignment</i>
           <% end %>
           <%= link_to users_path, class: "mdl-navigation__link" do %>
-            <i class="material-icons">account_box</i>            
+            <i class="material-icons">account_box</i>        
           <% end %>
           <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>          
         </nav>
@@ -33,12 +36,15 @@
     <div class="mdl-layout__drawer">
       <span class="mdl-layout-title">SGP</span>
       <nav class="mdl-navigation">
-        <%= link_to schedules_path, class: "mdl-navigation__link" do %>
-          CALENDAR <i class="material-icons">date_range</i>
-        <% end %>
-        <%= link_to users_path, class: "mdl-navigation__link" do %>
-          USER <i class="material-icons">account_box</i>
-        <% end %>
+        <%= link_to calendar_index_path, class: "mdl-navigation__link" do %>
+            <i class="material-icons">event</i>カレンダー
+          <% end %>
+          <%= link_to schedules_path, class: "mdl-navigation__link" do %>
+            <i class="material-icons">assignment</i>スケジュール一覧
+          <% end %>
+          <%= link_to users_path, class: "mdl-navigation__link" do %>
+            <i class="material-icons">account_box</i>ユーザ情報
+          <% end %>
         <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>
       </nav>
     </div>

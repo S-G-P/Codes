@@ -1,5 +1,9 @@
 class CalendarController < ApplicationController
-  def show
-     @schedules = Schedule.all
+
+  # GET /schedules
+  # GET /schedules.json
+  def index
+    @schedules = Schedule.all
   end
+  
 end
