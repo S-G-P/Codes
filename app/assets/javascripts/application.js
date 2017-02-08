@@ -54,7 +54,7 @@ function showCalendar() {
       dayNamesShort: ['日', '月', '火', '水', '木', '金', '土'],
       height: responsiveHeight,
       dayClick: function(){
-        alert('sample');
+        // alert('sample');
       },
       eventClick: function(calEvent, jsEvent, view) {
         window.location.href = window.location.href + "/" + calEvent.id;
@@ -70,30 +70,58 @@ function showCalendar() {
       },
       editable: true,
       eventDrop: function(event, delta, revertFunc) {
-        // 変更先の日付を配列で取得
-        var scheduleStart = event.start.toArray();
-        // 各配列の値を変数に格納
-        var scheduleNewYear = scheduleStart[0];
-        var scheduleNewMonth = scheduleStart[1] + 1;
-        var scheduleNewDay = scheduleStart[2];
-        var scheduleNewHour = scheduleStart[3];
-        var scheduleNewMinute = scheduleStart[4];
-        var scheduleNewSecound = scheduleStart[5];
-
-        jqXHR = $.ajax({
+        $.ajax({
           async: true,
           url: window.location.href + "/" + event.id,
-          type: "PUT",
-          data: {
-            "schedule[date_from(1i)]": scheduleNewYear,
-            "schedule[date_from(2i)]": scheduleNewMonth,
-            "schedule[date_from(3i)]": scheduleNewDay,
-            "schedule[date_from(4i)]": scheduleNewHour,
-            "schedule[date_from(5i)]": scheduleNewMinute,
-            "schedule[date_from(6i)]": scheduleNewSecound
-          },
+          type: "GET",
           dataType: 'json',
-          cache: false
+          cache: true,
+          success: function(data) {
+            // 変更先の日付を配列で取得
+            var scheduleStart = event.start.toArray();
+            
+            // 変更前の予定の終了日時をミリ秒で取得
+            var scheduleEndOld = Date.parse(data.date_to.slice(0,10).replace(/-/g, '/'));
+            var scheduleEnd = scheduleEndOld + delta.days() * 24 * 60 * 60 * 1000;
+            scheduleEnd = new Date(scheduleEnd);
+            
+            // alert(scheduleEnd.getFullYear());
+            // alert(scheduleEnd.getMonth() + 1);
+            // alert(scheduleEnd.getDate());
+            
+            // 各配列の値を変数に格納
+            var scheduleStartNewYear = scheduleStart[0];
+            var scheduleStartNewMonth = scheduleStart[1] + 1;
+            var scheduleStartNewDay = scheduleStart[2];
+            var scheduleStartNewHour = scheduleStart[3];
+            var scheduleStartNewMinute = scheduleStart[4];
+            var scheduleStartNewSecound = scheduleStart[5];
+            
+            var scheduleEndNewYear = scheduleEnd.getFullYear();
+            var scheduleEndNewMonth = scheduleEnd.getMonth() + 1;
+            var scheduleEndNewDay = scheduleEnd.getDate();
+            
+            // alert(delta.days());
+    
+            $.ajax({
+              async: true,
+              url: window.location.href + "/" + event.id,
+              type: "PUT",
+              data: {
+                "schedule[date_from(1i)]": scheduleStartNewYear,
+                "schedule[date_from(2i)]": scheduleStartNewMonth,
+                "schedule[date_from(3i)]": scheduleStartNewDay,
+                "schedule[date_from(4i)]": scheduleStartNewHour,
+                "schedule[date_from(5i)]": scheduleStartNewMinute,
+                "schedule[date_from(6i)]": scheduleStartNewSecound,
+                "schedule[date_to(1i)]": scheduleEndNewYear,
+                "schedule[date_to(2i)]": scheduleEndNewMonth,
+                "schedule[date_to(3i)]": scheduleEndNewDay,
+              },
+              dataType: 'json',
+              cache: false
+            })
+          }
         })
       }
     });
