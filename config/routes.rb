@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :schedule_users
   end
   
+  get 'my_user/new'
+  
   resources :calendar
   
   # The priority is based upon order of creation: first created -> highest priority.
