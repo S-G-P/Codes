@@ -1,0 +1,53 @@
+// Place all the styles related to the my_user controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+html, body {
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+main {
+    position: relative;
+}
+
+.mod-head-block {
+    background:url("user_head_photo_sample");
+    background-position: center;  /* 横長画像の中央を基準に表示 */
+    background-size: cover; /* 縦横比は保持して、背景領域を完全に覆う最小サイズになるように背景画像を拡大縮小する*/
+    height: 50vh;
+}
+
+.mod-user-photo-block {
+    width:200px;
+    height:200px;
+    border-radius:500px;
+    background-repeat: no-repeat;
+    background:url("user_photo_sample2");
+    background-position: center;  /* 横長画像の中央を基準に表示 */
+    background-size: cover; /* 縦横比は保持して、背景領域を完全に覆う最小サイズになるように背景画像を拡大縮小する*/
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 35%;
+    margin: auto;
+}
+
+.mod-profile-block {
+    margin: 130px auto;
+    text-align: center;  
+    border: 1px solid #FF0000;
+    width: 50%;
+}
+
+.user-card-square.mdl-card {
+  width: auto;
+  height: 320px;
+}
+.user-card-square > .mdl-card__title {
+  background:url("user_head_photo_sample");
+  background-position: center;  /* 横長画像の中央を基準に表示 */
+  background-size: cover; /* 縦横比は保持して、背景領域を完全に覆う最小サイズになるように背景画像を拡大縮小する*/
+}
+

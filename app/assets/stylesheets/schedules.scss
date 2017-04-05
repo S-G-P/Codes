@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.demo-list-three {
+  width: 100%;
+}
+
 .hide-accessible, .hide-text {
     position: absolute!important;
     clip: rect(1px 1px 1px 1px);

@@ -7,6 +7,15 @@ showCalendar = ->
   $.getJSON window.location.href + '.json', (json) ->
     # fullCalendar表示のための初期設定
     $('#calendar').fullCalendar
+      header: {
+        left: 'prev,next today myCustomButton'
+        center: 'title'
+        right: 'month,agendaWeek,agendaDay,listMonth'
+      }
+      contentHeight: 1200
+      minTime: '06:00:00'
+      maxTime: '24:00:00'
+      timeFormat: 'H(:mm)'
       displayEventTime: isDisplayEventTime
       defaultView: 'month'
       weekends: true
@@ -58,7 +67,7 @@ showCalendar = ->
       ]
       height: responsiveHeight
       dayClick: ->
-        alert 'sample'
+        window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/new'
         return
       eventClick: (calEvent, jsEvent, view) ->
         window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/' + calEvent.id
@@ -83,9 +92,10 @@ showCalendar = ->
         scheduleNewHour = scheduleStart[3]
         scheduleNewMinute = scheduleStart[4]
         scheduleNewSecound = scheduleStart[5]
+        requestUrl = window.location.href.replace(/calendar/g, 'schedules') + '/' + event.id
         jqXHR = $.ajax(
           async: true
-          url: window.location.href + '/' + event.id
+          url: requestUrl
           type: 'PUT'
           data:
             'schedule[date_from(1i)]': scheduleNewYear
@@ -105,7 +115,7 @@ showCalendar = ->
         title: val.title
         start: val.date_from
         end: val.date_to
-        color: '#999999'
+        color: '#FF8A80'
         textColor: 'white'
       return
     # scheduleを追加
@@ -113,7 +123,7 @@ showCalendar = ->
     return
   return
 
-$(document).ready showCalendar()
+$(window).load showCalendar()
 windowWidth = $(window).width()
 windowSm = 640
 # カレンダーの高さをレスポンシブ対応

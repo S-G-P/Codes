@@ -1,19 +1,26 @@
 <div class="mdl-grid">
-  <p class="mdl-cell mdl-cell--12-col" id="notice"><%= notice %></p>
-  
-  <h1 class="mdl-cell mdl-cell--12-col">ユーザ一覧</h1>
+  <h2 class="mdl-cell mdl-cell--12-col">ユーザ一覧</h2>
 </div>
 
 <div class="mdl-grid">
-  <p class="mdl-cell mdl-cell--11-col">名前</p>
-  <% @users.each do |user| %>
-    <div class="mdl-cell mdl-cell--12-col">
-      <%= link_to user.name, user %>
-      <%= link_to user, method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <i class="material-icons">delete</i>
-      <% end %>
-    </div>
-  <% end %>
+  <ul class="mdl-list mdl-cell mdl-cell--6-col">
+    <% @users.each do |user| %>
+      <li class="mdl-list__item mdl-list__item--three-line">
+        <span class="mdl-list__item-primary-content">
+          <i class="material-icons mdl-list__item-avatar">person</i>
+          <span><%= link_to user.name, user %><br></span>
+          <span>email: <%= user.email %><br></span>
+          <span class="mdl-list__item-text-body">
+          </span>
+        </span>
+        <span class="mdl-list__item-secondary-content">
+          <%= link_to user, method: :delete, data: { confirm: 'Are you sure?' } do %>
+            <i class="material-icons mdl-list__item-avatar">delete</i>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+  </ul>
 </div>
   
 <div class="mdl-grid">
