@@ -76,4 +76,5 @@ class SchedulesController < ApplicationController
     def schedule_params
       params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, schedule_users_attributes: [:id, :schedule_id, :user_id])
     end
+    
 end

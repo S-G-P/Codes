@@ -12,8 +12,7 @@ showCalendar = ->
         center: 'title'
         right: 'month,agendaWeek,agendaDay,listMonth'
       }
-      contentHeight: 1200
-      minTime: '06:00:00'
+      minTime: '00:00:00'
       maxTime: '24:00:00'
       timeFormat: 'H(:mm)'
       displayEventTime: isDisplayEventTime
@@ -123,7 +122,7 @@ showCalendar = ->
     return
   return
 
-$(window).load showCalendar()
+$ showCalendar()
 windowWidth = $(window).width()
 windowSm = 640
 # カレンダーの高さをレスポンシブ対応
@@ -136,5 +135,5 @@ if windowWidth <= windowSm
   isDisplayEventTime = false
 else
   #横幅640px超のとき（タブレット、PC）に行う処理を書く
-  responsiveHeight = 900
+  responsiveHeight = 1000
 # -- showCalendar() end --
