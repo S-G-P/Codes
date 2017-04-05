@@ -1,7 +1,35 @@
+<br>
 <%= javascript_tag do %>
   schedule = <%= raw @schedules.to_json %>;
+  weather = <%= raw @Weathers.to_json %>;
 <% end %>
-<div id="calendar"></div>
-  <div class='container'>
+<div class="mdl-layout">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--2-col-desktop mdl-cell--hide-phone">
+      <div class="mdl-grid">
+        <div class="mdl-cell mdl-grid-no-spacing mdl-cell--12-col-desktop">
+          --天気情報-<br />
+          <%= @Weathers["city"]["name"] %>
+        </div>
+        <div class="mdl-cell mdl-grid-no-spacing mdl-cell--12-col-desktop">
+          <% for i in 0..24 %>
+            <% if i%4 == 0 %>
+              <div style="font-size: 20px;">
+                <%= @Weathers["list"][i]["dt_txt"].to_time.in_time_zone('Tokyo').strftime("%m月%d日 %H時") %>
+              </div>
+              <div style="font-size: 30px;">
+                <% icon =  @Weathers["list"][i]["weather"][0]["icon"] %>
+                <%= image_tag("http://openweathermap.org/img/w/" + icon + ".png", width: "100px") %>
+                <%= (@Weathers["list"][i]["main"]["temp_max"] - 273.15).round %>℃<br /><br />
+              </div>
+            <% end %>
+          <% end %>
+        </div>          
+      </div>
+    </div>
+    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--10-col-desktop mdl-cell--12-col-phone">
+      <div id="calendar"></div>
+      <div class='container'></div>
+    </div>
   </div>
 </div>

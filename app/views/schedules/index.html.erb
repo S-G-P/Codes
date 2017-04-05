@@ -9,28 +9,29 @@
 </nav>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-8">
-      <h1>スケジュール一覧</h1>
+    <div>
+      <h2>スケジュール一覧</h2>
       <div id="content" data-0="padding-top: 192px;" data-192="padding-top: 190px;">
-        <% @schedules.each do |schedule| %>
-          <div class="card">
-            <%= link_to schedule.title, edit_schedule_path(schedule) %><br>
-            <%= schedule.date_from %>
-            <%= link_to schedule, method: :delete, data: { confirm: 'Are you sure?' } do %>
-              <i class="material-icons">delete</i>
-            <% end %>
-          </div>
-        <% end %>
+        <ul class="mdl-list mdl-cell mdl-cell--6-col">
+          <% @schedules.each do |schedule| %>
+            <li class="mdl-list__item mdl-list__item--three-line">
+              <span class="mdl-list__item-primary-content">
+                <i class="material-icons mdl-list__item-avatar">check</i>
+                <span><%= link_to schedule.title, edit_schedule_path(schedule) %><br></span>
+                <span class="mdl-list__item-text-body">
+                  <%= schedule.content %><br>
+                  <%= schedule.date_from %>
+                </span>
+              </span>
+              <span class="mdl-list__item-secondary-content">
+                <%= link_to schedule, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="material-icons mdl-list__item-avatar">delete</i>
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
       </div>
-    </div>
-    <div class="col-lg-4">
-      サイドバー<br>
-      桃太郎の物語は、いくつかの場面で出典により違いがある。ただし、物語後半にある鬼との戦いの場面では、概ねどの書籍でも桃太郎側の視点での勧善懲悪物語となっている。
-桃太郎の出生に関しては、桃から生まれたとする場合や、桃を食べた老夫婦が若返って子供を産んだとする場合がある。
-桃太郎の成長過程については、お爺さんとお婆さんの期待通り働き者に育ったとする場合や、三年寝太郎のように力持ちで大きな体に育つが怠け者で寝てばかりいるとする場合がある。
-成長した桃太郎は、鬼ヶ島の鬼が人々を苦しめていることを理由に鬼退治に旅立つが、その決意を自発的に行う場合と、村人や殿などに言われて受動的に行う場合とがある。
-出征時には両親から黍団子を餞別に貰う。道中、遭遇するイヌ、サル、キジにその黍団子を分け与えて家来にする。
-鬼ヶ島での鬼との戦いで勝利をおさめ、鬼が方々から奪っていった財宝を持って帰り、最終的に郷里のお爺さん・お婆さんの元に帰って幸せに暮らしたとして物語は締めくくられる。
     </div>
   </div>
 </div>
