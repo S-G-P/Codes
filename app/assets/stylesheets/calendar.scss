@@ -1,3 +1,15 @@
 // Place all the styles related to the Calendar controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.demo-card-wide.mdl-card {
+  width: 100%;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 60px;
+  background: rgb(33,150,243);
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}

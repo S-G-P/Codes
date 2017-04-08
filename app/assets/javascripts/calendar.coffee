@@ -12,10 +12,33 @@ showCalendar = ->
         center: 'title'
         right: 'month,agendaWeek,agendaDay,listMonth'
       }
-      minTime: '00:00:00'
+      minTime: '06:00:00'
       maxTime: '24:00:00'
       timeFormat: 'H(:mm)'
+      views: {
+        month: {
+          titleFormat: 'YYYY年 M月'
+          eventLimit: true
+        }
+        agendaWeek: {
+          titleFormat: 'YYYY年 M月 D日'
+        }
+        agendaDay: {
+          titleFormat: 'YYYY年 M月 D日'          
+        }
+        listMonth: {
+          titleFormat: 'YYYY年 M月'
+        }
+      }
+      buttonText: {
+        today:    '今日',
+        month:    '月',
+        week:     '週',
+        day:      '日',
+        list:     '一覧'
+      }
       displayEventTime: isDisplayEventTime
+      noEventsMessage: '予定が一件も登録されていません'
       defaultView: 'month'
       weekends: true
       monthNames: [
@@ -72,8 +95,8 @@ showCalendar = ->
         window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/' + calEvent.id
         return
       eventMouseover: (event, jsEvent, view) ->
-        $(this).css 'border-color', 'black'
-        $(this).css 'border-width', '2px'
+        $(this).css 'border-color', 'gray'
+        $(this).css 'border-width', '1px'
         $(this).css 'cursor', 'pointer'
         return
       eventMouseout: (event, jsEvent, view) ->
@@ -137,3 +160,4 @@ else
   #横幅640px超のとき（タブレット、PC）に行う処理を書く
   responsiveHeight = 1000
 # -- showCalendar() end --
+
