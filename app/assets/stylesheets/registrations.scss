@@ -1,6 +1,7 @@
 // Place all the styles related to the registrations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 body {
   height: 100%;
   overflow: hidden;
@@ -8,8 +9,6 @@ body {
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
 }
-
-
 
 .backRight {
   position: absolute;
@@ -80,6 +79,17 @@ body {
   margin-left: -125px;
   color: white;  
 }
+
+.content-sign-up-for-phone {
+  width: 250px;
+  margin: 0 auto;
+  top: 5%;
+  position: absolute;
+  left: 50%;
+  margin-left: -125px;
+  color: white;  
+}
+
 .sign-up-input-text {
   color: white !important;      
 }
@@ -88,6 +98,15 @@ body {
   width: 250px;
   margin: 0 auto;
   top: 25%;
+  position: absolute;
+  left: 50%;
+  margin-left: -125px;
+}
+
+.content-sign-in-for-phone {
+  width: 250px;
+  margin: 0 auto;
+  top: 10%;
   position: absolute;
   left: 50%;
   margin-left: -125px;

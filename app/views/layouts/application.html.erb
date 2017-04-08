@@ -54,13 +54,7 @@
     <% end %>
     <main class="mdl-layout__content">
       <div class="page-content"><!-- Your content goes here --></div>
-        <% if notice %>
-          <p class="alert alert-success"><%= notice %></p>
-        <% end %>
-        <% if alert %>
-          <p class="alert alert-danger"><%= alert %></p>
-        <% end %>  
-        <%= yield %>
+      <%= yield %>
     </main>
   </div>
 </body>
