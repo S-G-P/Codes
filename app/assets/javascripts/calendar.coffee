@@ -2,6 +2,31 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+windowFade = ->
+  $('#fade').each ->
+    $('#fade').fadeOut(1000).height $('body').height()
+    $('a').click ->
+      url = $(this).attr('href')
+      if @href.match(location.hostname) and $(this).attr('href').charAt(0) != '#' and !$(this).attr('rel') and !$(this).attr('target')
+        LinkURL = $(this).attr('href')
+        $('#fade').fadeIn 1000, ->
+          location.href = LinkURL
+          return
+        return false
+      return
+    return
+  return
+
+$('head').append '<style type="text/css">#fade{display:block;height:' + $(window).height() + 'px}</style>'
+
+window.onload = ->
+  windowFade()
+  return
+
+window.onunload = ->
+  windowFade()
+  return
+
 showCalendar = ->
   # JSONオブジェクトを取得
   $.getJSON window.location.href + '.json', (json) ->
@@ -10,7 +35,7 @@ showCalendar = ->
       header: {
         left: 'prev,next today myCustomButton'
         center: 'title'
-        right: 'month,agendaWeek,agendaDay,listMonth'
+        right: headerRightContents
       }
       minTime: '06:00:00'
       maxTime: '24:00:00'
@@ -145,7 +170,8 @@ showCalendar = ->
     return
   return
 
-$ showCalendar()
+
+# ウィンドウサイズを取得
 windowWidth = $(window).width()
 windowSm = 640
 # カレンダーの高さをレスポンシブ対応
@@ -156,8 +182,13 @@ if windowWidth <= windowSm
   #横幅640px以下のとき（つまりスマホ時）に行う処理を書く
   responsiveHeight = 650
   isDisplayEventTime = false
+  headerRightContents = 'month,listMonth'
 else
   #横幅640px超のとき（タブレット、PC）に行う処理を書く
   responsiveHeight = 1000
-# -- showCalendar() end --
+  headerRightContents = 'month,agendaWeek,agendaDay,listMonth'
+
+# カレンダーをレンダリングする
+$ showCalendar()
+
 
