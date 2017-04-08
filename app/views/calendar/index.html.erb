@@ -1,35 +1,82 @@
-<br>
 <%= javascript_tag do %>
   schedule = <%= raw @schedules.to_json %>;
   weather = <%= raw @Weathers.to_json %>;
 <% end %>
-<div class="mdl-layout">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--2-col-desktop mdl-cell--hide-phone">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-grid-no-spacing mdl-cell--12-col-desktop">
-          --天気情報-<br />
-          <%= @Weathers["city"]["name"] %>
-        </div>
-        <div class="mdl-cell mdl-grid-no-spacing mdl-cell--12-col-desktop">
-          <% for i in 0..24 %>
-            <% if i%4 == 0 %>
-              <div style="font-size: 20px;">
-                <%= @Weathers["list"][i]["dt_txt"].to_time.in_time_zone('Tokyo').strftime("%m月%d日 %H時") %>
-              </div>
-              <div style="font-size: 30px;">
-                <% icon =  @Weathers["list"][i]["weather"][0]["icon"] %>
-                <%= image_tag("http://openweathermap.org/img/w/" + icon + ".png", width: "100px") %>
-                <%= (@Weathers["list"][i]["main"]["temp_max"] - 273.15).round %>℃<br /><br />
-              </div>
-            <% end %>
-          <% end %>
-        </div>          
-      </div>
-    </div>
-    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--10-col-desktop mdl-cell--12-col-phone">
-      <div id="calendar"></div>
-      <div class='container'></div>
-    </div>
+<div id="fade">
+  <div class="fade-progress-bar" style="width: 40%;">
+    <div style="font-size: 20px">Loading</div>
+    <div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
   </div>
 </div>
+<div id="main">
+  <div class="mdl-layout">
+    <div class="mdl-grid">
+      <!-- カレンダー -->
+      <div class="mdl-cell mdl-grid-no-spacing mdl-cell--10-col-desktop mdl-cell--12-col-phone">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Calendar</h2>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-grid-no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-phone">
+              <div id="calendar"></div>
+              <div class='container'></div>
+            </div>            
+          </div>
+          <div class="mdl-card__menu">
+            <button id="demo-menu-lower-right"
+                    class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                for="demo-menu-lower-right">
+              <li class="mdl-menu__item"><%= link_to new_schedule_path, style:"text-decoration: none;" do %>新しく予定を作成<% end %></li>
+              <li class="mdl-menu__item">カレンダーの設定</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- ./カレンダー -->
+      <!-- 天気情報 -->    
+      <div class="mdl-cell mdl-grid-no-spacing mdl-cell--2-col-desktop">
+        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+          <div class="mdl-card__title">
+            <h2 class="mdl-card__title-text">Weather</h2>
+          </div>
+          <div class="mdl-grid">
+            <div class="mdl-card__medium mdl-card__supporting-text">
+              現在地：東京
+            </div>
+            <% for i in 0..24 %>
+              <% if i%4 == 0 %>
+              <div class="mdl-card__actions mdl-card--border mdl-card__supporting-text">
+                <div style="font-size: 20px;">
+                  <%= @Weathers["list"][i]["dt_txt"].to_time.in_time_zone('Tokyo').strftime("%m月%d日　　 %H時") %>
+                </div>
+                <div style="font-size: 30px;">
+                  <% icon =  @Weathers["list"][i]["weather"][0]["icon"] %>
+                  <%= image_tag("http://openweathermap.org/img/w/" + icon + ".png", width: "100px") %>
+                  <%= (@Weathers["list"][i]["main"]["temp_max"] - 273.15).round %>℃
+                </div>
+              </div>              
+              <% end %>
+            <% end %>
+          </div>
+          <div class="mdl-card__menu">
+            <button id="weather-menu-lower-right" class="mdl-button mdl-js-button mdl-button--icon">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                for="weather-menu-lower-right">
+              <li class="mdl-menu__item">位置情報を設定する</li>
+            </ul>
+          </div>
+        </div>          
+      </div>
+      <!-- ./天気情報 -->
+    </div>
+    <!-- ./mdl-grid -->
+  </div>
+  <!-- ./mdl-layout -->
+</div>
+<!-- ./main -->

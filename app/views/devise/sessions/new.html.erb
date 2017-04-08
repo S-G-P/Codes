@@ -1,32 +1,205 @@
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|%>
-  <div class="mdl-grid">
-    <h2 class="mdl-cell mdl-cell--12-col">ログイン</h2>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
-      <%= f.label :email, class: 'mdl-textfield__label'%>
-      <%= f.text_field :email, class: 'mdl-textfield__input', autofocus: true %>
-    </div>
-  
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
-      <%= f.label :password, class: 'mdl-textfield__label' %>
-      <%= f.password_field :password, class: 'mdl-textfield__input' %>
+<div id="back">
+  <div class="backRight"></div>
+  <div class="backLeft"></div>
+</div>
+<style>
+.left input {
+  border-bottom: 0.5px solid white !important;
+  -webkit-box-shadow: 0 0.5px 0 0 white !important;
+  -moz-box-shadow: 0 0.5px 0 0 white !important;
+  box-shadow: 0 0.5px 0 0 white !important;
+}
+</style>
+<script>
+$(function(){
+    var agent = navigator.userAgent;
+    if(agent.search(/iPhone/) != -1 || agent.search(/iPad/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1){
+	 	    // スマホ画面の場合
+	   	 $('#slideBox').hide();
+  	 	 $('.backRight').css("background","#f9f9f9");    	 
+   		 $('.backLeft').css("background","#f9f9f9");
+	   	 $('.mdl-layout__content').css("background","#f9f9f9");   		    		 
+    	 $('.content-sign-up-for-phone').hide();
+    } else {
+	    	// PC画面の場合
+    	 $('#login-phone').hide();
+    }
+});
+
+function changeSignInUp() {
+	$('.content-sign-up-for-phone').toggle();
+	$('.content-sign-in-for-phone').toggle();
+
+	// sign up画面が表示されている場合
+	if($('.content-sign-up-for-phone').css('display') == 'block') {
+	  $('.mdl-layout__content').css("background","#2C3034");   		    		 		
+		$('.content-sign-up-for-phone').css("background", "#2C3034");	
+		$('.backRight').css("background","#2C3034");
+	  $('.backLeft').css("background","#2C3034");
+	} else {
+		$('.content-sign-in-for-phone').css("background", "#f9f9f9");	
+		$('.backRight').css("background","#f9f9f9");
+	  $('.backLeft').css("background","#f9f9f9");
+	}
+}
+</script>
+
+<!-- PC用 -->
+<div id="slideBox">
+  <div class="topLayer">
+    <div class="left">
+      <div class="content-sign-up">
+        <h2>Sign Up</h2>
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>  
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <div class="form-group">
+      	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          		          	
+	          	<%= f.label :name, class: 'mdl-textfield__label sign-up-input-text' %>
+				      <%= f.text_field :name, class: 'mdl-textfield__input', autofocus: true  %>
+	          </div>
+          </div>	          
+          <div class="form-group">
+      	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          	
+		   	      <%= f.label :email, class: 'mdl-textfield__label sign-up-input-text' %>
+  					  <%= f.email_field :email, class: 'mdl-textfield__input'%>
+	          </div>    				  
+          </div>
+          <div class="form-group">
+      	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          	
+	          	<%= f.label :password, class: 'mdl-textfield__label sign-up-input-text' %>
+				      <% if @minimum_password_length %>
+					      <em>(<%= @minimum_password_length %> characters minimum)</em>
+				      <% end %>
+				      <%= f.password_field :password, class: 'mdl-textfield__input', autocomplete: "off" %>
+		          </div>				      
+          </div>
+          <div class="form-group">
+      	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+	          	<%= f.label :password_confirmation, class: 'mdl-textfield__label sign-up-input-text' %>
+				      <%= f.password_field :password_confirmation, class: 'mdl-textfield__input', autocomplete: "off" %>
+   	         </div>
+          </div>
+	        <button id="goLeft" type="button" class="off">Login</button>
+	        <button>Sign up</button>
+        <% end %>
+      </div>
     </div>
     
+    <div class="right">
+      <div class="content-sign-in">
+        <h2>Login</h2>
+        <% if notice %>
+          <p class="alert alert-success"><%= notice %></p>
+        <% end %>
+        <% if alert %>
+          <p class="alert alert-danger"><%= alert %></p>
+        <% end %>  
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="form-group">   
+          	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+				      <%= f.label :email, class: 'mdl-textfield__label'%>
+				      <%= f.text_field :email, class: 'mdl-textfield__input', autofocus: true %>
+				    </div>
+			    </div>
+          <div class="form-group">
+          	 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+						   <%= f.label :password, class: 'mdl-textfield__label' %>
+					     <%= f.password_field :password, class: 'mdl-textfield__input' %>
+				    </div>
+          </div>
+          <% if devise_mapping.rememberable? %>
+			      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-textfield--floating-label mdl-cell mdl-cell--8-col" for="checkbox">
+			        <%= f.check_box :remember_me, class: "mdl-checkbox__input"%>
+			        <%= f.label :remember_me, class: "mdl-checkbox__label", rows: "3" %>
+			      </label>
+			    <% end %>
+          <button id="goRight" type="button" class="off">Sign Up</button>
+			    <button id="login" type="submit">Login</button>
+		    <% end %>        
+      </div>
     </div>
-    <% if devise_mapping.rememberable? %>
-      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-textfield--floating-label mdl-cell mdl-cell--8-col" for="checkbox">
-        <%= f.check_box :remember_me, class: "mdl-checkbox__input"%>
-        <%= f.label :remember_me, class: "mdl-checkbox__label", rows: "3" %>
-      </label>
-    <% end -%>
-    
-    <div class="actions">
-      <%= f.submit "Log in", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-cell mdl-cell--8-col" %>
-    </div>
-    <%= render "devise/shared/links" %> 
   </div>
-<% end %>
+</div>
 
 
+<!-- スマホ用 -->
+<div id="login-phone">
+	<div class="content-sign-up-for-phone left">
+    <h2>Sign Up</h2>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>  
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <div class="form-group">
+  	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          		          	
+        	<%= f.label :name, class: 'mdl-textfield__label sign-up-input-text' %>
+		      <%= f.text_field :name, class: 'mdl-textfield__input', autofocus: true  %>
+        </div>
+      </div>	          
+      <div class="form-group">
+  	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          	
+   	      <%= f.label :email, class: 'mdl-textfield__label sign-up-input-text' %>
+				  <%= f.email_field :email, class: 'mdl-textfield__input'%>
+        </div>    				  
+      </div>
+      <div class="form-group">
+  	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          	
+        	<%= f.label :password, class: 'mdl-textfield__label sign-up-input-text' %>
+		      <% if @minimum_password_length %>
+			      <em>(<%= @minimum_password_length %> characters minimum)</em>
+		      <% end %>
+		      <%= f.password_field :password, class: 'mdl-textfield__input', autocomplete: "off" %>
+          </div>				      
+      </div>
+      <div class="form-group">
+  	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+        	<%= f.label :password_confirmation, class: 'mdl-textfield__label sign-up-input-text' %>
+		      <%= f.password_field :password_confirmation, class: 'mdl-textfield__input', autocomplete: "off" %>
+          </div>
+      </div>
+      <button id="goLeft" type="button" class="off" onClick="changeSignInUp()">Login</button>
+      <button>Sign up</button>
+    <% end %>
+  </div>
 
 
-
+  <div class="content-sign-in-for-phone right">
+    <h2>Login</h2>
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>  
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">   
+      	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+		      <%= f.label :email, class: 'mdl-textfield__label'%>
+		      <%= f.text_field :email, class: 'mdl-textfield__input', autofocus: true %>
+		    </div>
+	    </div>
+      <div class="form-group">
+      	 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">
+				   <%= f.label :password, class: 'mdl-textfield__label' %>
+			     <%= f.password_field :password, class: 'mdl-textfield__input' %>
+		    </div>
+      </div>
+      <% if devise_mapping.rememberable? %>
+	      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-textfield--floating-label mdl-cell mdl-cell--8-col" for="checkbox">
+	        <%= f.check_box :remember_me, class: "mdl-checkbox__input"%>
+	        <%= f.label :remember_me, class: "mdl-checkbox__label", rows: "3" %>
+	      </label>
+	    <% end %>
+      <button id="goRight" type="button" class="off" onClick="changeSignInUp()">Sign Up</button>
+	    <button id="login" type="submit">Login</button>
+    <% end %>        
+  </div>
+</div>
