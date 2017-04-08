@@ -185,7 +185,7 @@ if windowWidth <= windowSm
   headerRightContents = 'month,listMonth'
 else
   #横幅640px超のとき（タブレット、PC）に行う処理を書く
-  responsiveHeight = 1000
+  responsiveHeight = 1070
   headerRightContents = 'month,agendaWeek,agendaDay,listMonth'
 
 # カレンダーをレンダリングする
