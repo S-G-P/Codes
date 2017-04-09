@@ -113,6 +113,7 @@ showCalendar = ->
         '土'
       ]
       height: responsiveHeight
+      forceEventDuration: true
       dayClick: ->
         window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/new'
         return
@@ -129,9 +130,14 @@ showCalendar = ->
         $(this).css 'border-width', '0px'
         return
       editable: true
+      eventResize: (event, delta, revertFunc, jsEvent, ui, view) ->
+        console.log(event)
+        return
       eventDrop: (event, delta, revertFunc) ->
         # 変更先の日付を配列で取得
         scheduleStart = event.start.toArray()
+        scheduleEnd = event.end.toArray()
+        console.log(event)   
         # 各配列の値を変数に格納
         scheduleNewYear = scheduleStart[0]
         scheduleNewMonth = scheduleStart[1] + 1
@@ -139,6 +145,12 @@ showCalendar = ->
         scheduleNewHour = scheduleStart[3]
         scheduleNewMinute = scheduleStart[4]
         scheduleNewSecound = scheduleStart[5]
+        scheduleNewEndYear = scheduleEnd[0]
+        scheduleNewEndMonth = scheduleEnd[1] + 1
+        scheduleNewEndDay = scheduleEnd[2]
+        scheduleNewEndHour = scheduleEnd[3] + 1
+        scheduleNewEndMinute = scheduleEnd[4]
+        scheduleNewEndSecound = scheduleEnd[5]
         requestUrl = window.location.href.replace(/calendar/g, 'schedules') + '/' + event.id
         jqXHR = $.ajax(
           async: true
@@ -151,6 +163,12 @@ showCalendar = ->
             'schedule[date_from(4i)]': scheduleNewHour
             'schedule[date_from(5i)]': scheduleNewMinute
             'schedule[date_from(6i)]': scheduleNewSecound
+            'schedule[date_to(1i)]': scheduleNewEndYear
+            'schedule[date_to(2i)]': scheduleNewEndMonth
+            'schedule[date_to(3i)]': scheduleNewEndDay
+            'schedule[date_to(4i)]': scheduleNewEndHour
+            'schedule[date_to(5i)]': scheduleNewEndMinute
+            'schedule[date_to(6i)]': scheduleNewEndSecound
           dataType: 'json'
           cache: false)
         return
@@ -192,3 +210,39 @@ else
 $ showCalendar()
 
 
+# 位置情報取得
+success = (pos) ->
+  # 緯度
+  document.querySelector('#latitude').textContent = pos.coords.latitude
+  # 経度
+  document.querySelector('#longitude').textContent = pos.coords.longitude
+  # 移動方向
+  document.querySelector('#heading').textContent = pos.coords.heading
+  # 移動速度
+  document.querySelector('#speed').textContent = pos.coords.speed
+  requestUrl = 'https://' + location.host + '/location'
+  jqXHR = $.ajax(
+    async: true
+    url: requestUrl
+    type: 'POST'
+    data:
+      'address' : "none"
+      'latitude': pos.coords.latitude
+      'longitude': pos.coords.longitude
+    dataType: 'json'
+    cache: false)
+  return
+
+error = (err) ->
+  console.warn 'ERROR(' + err.code + '): ' + err.message
+  return
+  
+document.addEventListener 'DOMContentLoaded', (->
+  options = 
+    enableHighAccuracy: true
+    timeout: 60000
+    maximumAge: 0
+  # 位置情報取得
+  window.navigator.geolocation.watchPosition success, error, options
+  return
+), false
