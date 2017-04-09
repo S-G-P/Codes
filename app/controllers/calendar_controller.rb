@@ -10,14 +10,22 @@ class CalendarController < ApplicationController
     @Weathers = get_weather_json
     @schedules = Schedule.all
   end
-  
+
   private 
      # OpenWeatherMap API
     def get_weather_json
+      @location = Location.find_by(user_id: current_user.id)
+      if @location == nil
+        # tokyo
+        lat = 35
+        lon = 139
+      else
+        lat = @location.latitude
+        lon = @location.longitude
+      end
       require "json"
       require "open-uri"
-      
-      response = open(BASE_URL + "?id=#{CITY_ID}&APPID=#{API_KEY}")
+      response = open(BASE_URL + "?lat=#{lat}&lon=#{lon}&APPID=#{API_KEY}")
       json_request = JSON.parse(response.read)
       
       return json_request

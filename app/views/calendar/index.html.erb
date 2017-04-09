@@ -19,6 +19,12 @@
           </div>
           <div class="mdl-grid">
             <div class="mdl-cell mdl-grid-no-spacing mdl-cell--12-col-desktop mdl-cell--12-col-phone">
+              <% if notice %>
+                <p class="alert alert-success"><%= notice %></p>
+              <% end %>
+                <% if alert %>
+                <p class="alert alert-danger"><%= alert %></p>
+              <% end %> 
               <div id="calendar"></div>
               <div class='container'></div>
             </div>            
@@ -58,7 +64,7 @@
                   <%= image_tag("http://openweathermap.org/img/w/" + icon + ".png", width: "100px") %>
                   <%= (@Weathers["list"][i]["main"]["temp_max"] - 273.15).round %>℃
                 </div>
-              </div>              
+              </div>
               <% end %>
             <% end %>
           </div>
@@ -72,6 +78,16 @@
             </ul>
           </div>
         </div>          
+
+  <div class="div-geolocation-header">緯度</div>
+  <div id="latitude">-</div>
+  <div class="div-geolocation-header">経度</div>
+  <div id="longitude">-</div>
+  <div class="div-geolocation-header">移動方向</div>
+  <div id="heading">-</div>
+  <div class="div-geolocation-header">移動速度</div>
+  <div id="speed">-</div>
+
       </div>
       <!-- ./天気情報 -->
     </div>

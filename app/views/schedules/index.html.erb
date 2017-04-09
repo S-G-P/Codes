@@ -1,4 +1,9 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+  <% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %> 
 <nav class="menu menu--floating"  role="navigation">    
   <a href="#" class="menu--floating__action" title="Option"><span class="hide-accessible">Option</span></a>
   <a href="#" class="menu--floating__action" title="Option"><span class="hide-accessible">Option</span></a>
