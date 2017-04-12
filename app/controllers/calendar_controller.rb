@@ -3,12 +3,15 @@ class CalendarController < ApplicationController
   API_KEY = "b6ee02246df0875f4546f856083cadea"
   BASE_URL = "http://api.openweathermap.org/data/2.5/forecast"
   CITY_ID = "1850147" #TOKYO
+  
+  before_action :set_schedule, only: [:show, :edit, :update, :destroy]  
+  before_action :authenticate_user!
 
   # GET /schedules
   # GET /schedules.json
   def index
+    @schedules = current_user.schedules.all
     @Weathers = get_weather_json
-    @schedules = Schedule.all
   end
 
   private 
@@ -30,4 +33,15 @@ class CalendarController < ApplicationController
       
       return json_request
     end
+      
+    # Use callbacks to share common setup or constraints between actions.
+    def set_schedule
+      @schedule = current_user.schedules.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def schedule_params
+      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, :user_id, schedule_users_attributes: [:id, :schedule_id, :user_id])
+    end
+    
 end

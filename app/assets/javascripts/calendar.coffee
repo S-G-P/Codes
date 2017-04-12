@@ -30,6 +30,7 @@ window.onunload = ->
 showCalendar = ->
   # JSONオブジェクトを取得
   $.getJSON window.location.href + '.json', (json) ->
+    console.log(json)
     # fullCalendar表示のための初期設定
     $('#calendar').fullCalendar
       header: {
