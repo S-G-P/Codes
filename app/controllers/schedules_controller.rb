@@ -1,10 +1,11 @@
 class SchedulesController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /schedules
   # GET /schedules.json
   def index
-    @schedules = Schedule.all
+    @schedules = current_user.schedules.all
   end
 
   # GET /schedules/1
@@ -33,7 +34,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to calendar_index_path, notice: 'スケジュールが作成されました。' }
+        format.html { redirect_to calendar_path, notice: 'スケジュールが作成されました。' }
         format.json { render :show, status: :created, location: @schedule }
       else
         format.html { render :new }
@@ -47,7 +48,7 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to calendar_index_path, notice: 'スケジュールが更新されました。' }
+        format.html { redirect_to calendar_path, notice: 'スケジュールが更新されました。' }
         format.json { render :show, status: :ok, location: @schedule }
       else
         format.html { render :edit }
@@ -61,7 +62,7 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to calendar_index_path, notice: 'スケジュールが削除されました。' }
+      format.html { redirect_to calendar_path, notice: 'スケジュールが削除されました。' }
       format.json { head :no_content }
     end
   end
@@ -69,12 +70,12 @@ class SchedulesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_schedule
-      @schedule = Schedule.find(params[:id])
+      @schedule = current_user.schedules.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, schedule_users_attributes: [:id, :schedule_id, :user_id])
+      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, :user_id, schedule_users_attributes: [:id, :schedule_id, :user_id])
     end
     
 end

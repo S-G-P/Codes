@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     resources :schedule_users
   end
   
-  resources :calendar
+  get 'calendar', to: 'calendar#index'
+  get 'calendar/to_json', to: 'calendar#index_json'
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

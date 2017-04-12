@@ -27,7 +27,7 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <%= link_to calendar_index_path, class: "mdl-navigation__link" do %>
+            <%= link_to calendar_path, class: "mdl-navigation__link" do %>
               <i class="material-icons">event</i>
             <% end %>
             <%= link_to schedules_path, class: "mdl-navigation__link" do %>
@@ -43,7 +43,7 @@
       <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">SGP</span>
         <nav class="mdl-navigation">
-          <%= link_to calendar_index_path, class: "mdl-navigation__link" do %>
+          <%= link_to calendar_path, class: "mdl-navigation__link" do %>
               <i class="material-icons">event</i>カレンダー
             <% end %>
             <%= link_to schedules_path, class: "mdl-navigation__link" do %>

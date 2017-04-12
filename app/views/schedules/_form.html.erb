@@ -1,4 +1,5 @@
 <%= form_for(@schedule, html: {class: "form-horizontal", style: "margin-bottom:15px;"}) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
   <% if @schedule.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@schedule.errors.count, "error") %> prohibited this schedule from being saved:</h2>

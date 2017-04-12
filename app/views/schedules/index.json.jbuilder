@@ -5,4 +5,5 @@ json.array! Schedule.all do |schedule|
   json.date_to schedule.date_to
   json.place schedule.place
   json.content schedule.content
+  json.user_id schedule.user_id
 end
