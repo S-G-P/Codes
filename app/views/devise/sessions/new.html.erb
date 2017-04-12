@@ -60,14 +60,14 @@ function changeSignInUp() {
 	        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 	          <div class="form-group">
 	      	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          		          	
+					<%= f.text_field :name, class: 'mdl-textfield__input', autofocus: true  %>
 		          	<%= f.label :name, class: 'mdl-textfield__label sign-up-input-text' %>
-					      <%= f.text_field :name, class: 'mdl-textfield__input', autofocus: true  %>
 		          </div>
 	          </div>	          
 	          <div class="form-group">
 	      	    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--8-col">	          	
 			   	      <%= f.label :email, class: 'mdl-textfield__label sign-up-input-text' %>
-	  					  <%= f.email_field :email, class: 'mdl-textfield__input'%>
+  					  <%= f.email_field :email, class: 'mdl-textfield__input'%>
 		          </div>    				  
 	          </div>
 	          <div class="form-group">
@@ -114,14 +114,14 @@ function changeSignInUp() {
 					    </div>
 	          </div>
 	          <% if devise_mapping.rememberable? %>
-				      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-textfield--floating-label mdl-cell mdl-cell--8-col" for="checkbox">
+				      <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect mdl-textfield--floating-label mdl-cell mdl-cell--8-col" for="user_remember_me">
+				        <%= f.label :remember_me, class: "mdl-checkbox__label", rows: "3" %>				      	
 				        <%= f.check_box :remember_me, class: "mdl-checkbox__input"%>
-				        <%= f.label :remember_me, class: "mdl-checkbox__label", rows: "3" %>
 				      </label>
 				    <% end %>
-	          <button id="goRight" type="button" class="off">Sign Up</button>
-				    <button id="login" type="submit">Login</button>
-			    <% end %>        
+			      <button id="goRight" type="button" class="off">Sign Up</button>
+						<button id="login" type="submit">Login</button>
+		  	  <% end %>        
 	      </div>
 	    </div>
 	  </div>
