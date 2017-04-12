@@ -34,7 +34,7 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new(schedule_params)
     respond_to do |format|
       if @schedule.save
-        format.html { redirect_to calendar_index_path, notice: 'スケジュールが作成されました。' }
+        format.html { redirect_to calendar_path, notice: 'スケジュールが作成されました。' }
         format.json { render :show, status: :created, location: @schedule }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class SchedulesController < ApplicationController
   def update
     respond_to do |format|
       if @schedule.update(schedule_params)
-        format.html { redirect_to calendar_index_path, notice: 'スケジュールが更新されました。' }
+        format.html { redirect_to calendar_path, notice: 'スケジュールが更新されました。' }
         format.json { render :show, status: :ok, location: @schedule }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class SchedulesController < ApplicationController
   def destroy
     @schedule.destroy
     respond_to do |format|
-      format.html { redirect_to calendar_index_path, notice: 'スケジュールが削除されました。' }
+      format.html { redirect_to calendar_path, notice: 'スケジュールが削除されました。' }
       format.json { head :no_content }
     end
   end

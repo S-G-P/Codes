@@ -6,12 +6,17 @@ class CalendarController < ApplicationController
   
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]  
   before_action :authenticate_user!
-
-  # GET /schedules
-  # GET /schedules.json
+  
+  # GET /calendar
   def index
     @schedules = current_user.schedules.all
     @Weathers = get_weather_json
+  end
+  
+  # GET /calendar/to_json
+  def index_json
+    schedules = current_user.schedules.all
+    render :json => schedules
   end
 
   private 
