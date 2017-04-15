@@ -1,0 +1,22 @@
+<form  id="form">
+  <input id="text_input">
+  <input type="submit">
+</form>
+<ul id="msg_box">
+</ul>
+<script>
+  var dispatcher = new WebSocketRails("s-g-p-gee-awa.c9users.io/websocket"); //ドメインは適宜変える
+  var form = document.getElementById("form");
+  var text_input = document.getElementById("text_input");
+  var msg_box = document.getElementById("msg_box");
+
+  form.onsubmit = function(e){
+    dispatcher.trigger("send_message", { msg: text_input.value });
+    e.preventDefault();
+  }
+  dispatcher.bind("spread_message", function(data) {
+    var li = document.createElement("li");
+    li.textContent = data.msg;
+    msg_box.appendChild(li);
+  });
+</script>

@@ -17,3 +17,5 @@
 //= require fullcalendar
 //= require_tree .
 
+//= require websocket_rails/main
+
