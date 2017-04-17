@@ -1,22 +1,76 @@
-<p id="notice"><%= notice %></p>
-
-<strong>タイトル</strong>
-<%= @schedule.title %><br>
-
-<strong>日時</strong>
-<%= @schedule.date_from %> 〜 <%= @schedule.date_to %><br>
-
-<strong>場所</strong>
-<%= @schedule.place %><br>
-
-<strong>内容</strong>
-<%= @schedule.content %><br>
-
-<strong>登録済みユーザ</strong>
-<% @schedule.users.each do |user| %>
-  <%= user.name %>
-<% end %>
-<br>
-
-<%= link_to 'Edit', edit_schedule_path(@schedule) %>
-<%= link_to 'Back', calendar_path %>
+<div class="mdl-layout">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--10-col-desktop mdl-cell--12-col-phone">
+      
+      <p id="notice"><%= notice %></p>
+      <style>
+      .card-wide.mdl-card {
+        width: 1024px;
+      }
+      .card-wide > .mdl-card__title {
+        color: #fff;
+        height: 250px;
+        // background: url('../assets/demos/welcome_card.jpg') center / cover;
+      }
+      .card-wide > .mdl-card__menu {
+        color: #fff;
+      }
+      </style>
+      
+      <div class="card-wide mdl-card mdl-shadow--2dp">
+        <div class="mdl-card__title mdl-color--blue">
+          <h2 class="mdl-card__title-text"><%= @schedule.title %><br></h2>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col">
+              <i class="material-icons">date_range</i>
+            </div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <%= @schedule.date_from %> 〜 <%= @schedule.date_to %><br>
+            </div>
+          </div>  
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col">
+              <i class="material-icons">place</i>              
+            </div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <%= @schedule.place %><br>
+            </div>
+          </div>  
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col">
+              <i class="material-icons">content_paste</i>              
+            </div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <%= @schedule.content %><br>                        
+            </div>
+          </div>            
+          <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--1-col">
+              <i class="material-icons">group</i>              
+            </div>
+            <div class="mdl-cell mdl-cell--10-col">
+              <% @schedule.users.each do |user| %>
+                <%= user.name %><br>
+              <% end %>
+            </div>
+          </div>            
+        </div>
+        
+        <div class="mdl-card__actions mdl-card--border">
+          <%= link_to 'Edit', edit_schedule_path(@schedule) , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+          <%= link_to 'Back', calendar_path , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" , style: "color: black"%>
+        </div>
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">share</i>
+          </button>
+        </div>
+      </div>
+    </div>    
+    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--2-col-desktop mdl-cell--12-col-phone">
+      
+    </div>          
+  </div>
+</div>

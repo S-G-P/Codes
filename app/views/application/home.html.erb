@@ -1,9 +1,23 @@
-<form  id="form">
-  <input id="text_input">
-  <input type="submit">
-</form>
-<ul id="msg_box">
-</ul>
+<div class="home" id="msg_box">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-shadow--2dp chat-box">
+      <div class='chat-wrapper'>
+        <div class='chat-message padding'>
+          <!--ここにチャットのメッセージが入る-->
+        </div>
+      </div>
+    </div>        
+  </div>  
+  
+  <form id="form" class="form-button">
+    <input id="hidden_input" type="hidden" value="<%= current_user.name %>">
+    <div class="mdl-textfield mdl-js-textfield">
+      <input class="mdl-textfield__input" type="text" id="text_input">
+      <label class="mdl-textfield__label" for="text_input">Say something...</label>
+    </div>
+    <button type="submit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">send</i></button>
+  </form>
+</div>
 <script>
   var dispatcher = new WebSocketRails("s-g-p-gee-awa.c9users.io/websocket"); //ドメインは適宜変える
   var form = document.getElementById("form");
@@ -11,12 +25,76 @@
   var msg_box = document.getElementById("msg_box");
 
   form.onsubmit = function(e){
-    dispatcher.trigger("send_message", { msg: text_input.value });
+    dispatcher.trigger("send_message", { msg: text_input.value, user: hidden_input.value });
     e.preventDefault();
   }
   dispatcher.bind("spread_message", function(data) {
-    var li = document.createElement("li");
-    li.textContent = data.msg;
-    msg_box.appendChild(li);
+    var message = document.createElement("p");
+    if (data.msg == "" || data.msg == null) {
+      data.msg = "　";
+    }
+    message.textContent = data.msg;
+    var user_name = data.user;
+    if (user_name != hidden_input.value) {
+      // 受信したユーザが自分意外であれば左に表示
+      if ( $(".chat-message-localisation:last").text() != user_name) {
+        console.log($(".chat-message-localisation:last"))
+        
+        var div = $('<div class="chat-message chat-message-recipient"></div>');
+        $(".padding").append(div);
+        
+        div = $("<img class='chat-image chat-image-default' src='http://www.michaelmammoliti.com/_projects/chat/_media/img/user1.jpg' />");
+        $(".chat-message:last").append(div);
+        
+        div = $("<div class='chat-message-wrapper'></div>");
+        $(".chat-image:last").after(div);
+        
+        div = $("<div class='chat-message-content'></div>");
+        $(".chat-message-wrapper:last").append(div);
+        
+        $(".chat-message-content:last").append(message);
+        
+        div = $("<div class='chat-details'></div>");
+        $(".chat-message-content:last").after(div);
+        
+        div = $("<span class='chat-message-localisation font-size-small'>" + user_name + "</span>");
+        $(".chat-details:last").append(div);
+  
+        div = $("<span class='chat-message-read-status font-size-small'>- Read</span>");
+        $(".chat-details:last").append(div);
+      } else {
+        $(".chat-message-content:last").append(message);        
+      }
+    } else {
+      // 受信したユーザが自分であれば右に表示      
+      if ( $(".chat-message-localisation:last").text() != user_name) {
+        console.log($(".chat-message-localisation:last"))
+        
+        var div = $('<div class="chat-message chat-message-sender"></div>');
+        $(".padding").append(div);
+        
+        div = $("<img class='chat-image chat-image-default' src='http://www.michaelmammoliti.com/_projects/chat/_media/img/user2.jpg' />");
+        $(".chat-message:last").append(div);
+        
+        div = $("<div class='chat-message-wrapper'></div>");
+        $(".chat-image:last").after(div);
+        
+        div = $("<div class='chat-message-content'></div>");
+        $(".chat-message-wrapper:last").append(div);
+        
+        $(".chat-message-content:last").append(message);
+        
+        div = $("<div class='chat-details'></div>");
+        $(".chat-message-content:last").after(div);
+        
+        div = $("<span class='chat-message-localisation font-size-small'>" + user_name + "</span>");
+        $(".chat-details:last").append(div);
+  
+        div = $("<span class='chat-message-read-status font-size-small'>- Read</span>");
+        $(".chat-details:last").append(div);
+      } else {
+        $(".chat-message-content:last").append(message);        
+      }
+    }
   });
 </script>

@@ -22,12 +22,57 @@
             <li class="mdl-list__item mdl-list__item--three-line">
               <span class="mdl-list__item-primary-content">
                 <i class="material-icons mdl-list__item-avatar">check</i>
-                <span><%= link_to schedule.title, edit_schedule_path(schedule) %><br></span>
-                <span class="mdl-list__item-text-body">
+                <span class="mdl-list__item-text-body">                
+                  <button id="show-dialog" type="button" class="mdl-button"><%= schedule.title%></button>
                   <%= schedule.content %><br>
                   <%= schedule.date_from %>
                 </span>
               </span>
+              <dialog class="mdl-dialog" style="width: 95%;">
+                <h4 class="mdl-dialog__title">
+                  <%= schedule.title %>
+                </h4>
+                <div class="mdl-dialog__content">
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--1-col">
+                      <i class="material-icons">date_range</i>
+                    </div>
+                    <div class="mdl-cell mdl-cell--10-col">
+                      <%= schedule.date_from %> 〜 <%= schedule.date_to %><br>
+                    </div>
+                  </div>  
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--1-col">
+                      <i class="material-icons">place</i>              
+                    </div>
+                    <div class="mdl-cell mdl-cell--10-col">
+                      <%= schedule.place %><br>
+                    </div>
+                  </div>  
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--1-col">
+                      <i class="material-icons">content_paste</i>              
+                    </div>
+                    <div class="mdl-cell mdl-cell--10-col">
+                      <%= schedule.content %><br>                        
+                    </div>
+                  </div>            
+                  <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--1-col">
+                      <i class="material-icons">group</i>              
+                    </div>
+                    <div class="mdl-cell mdl-cell--10-col">
+                      <% schedule.users.each do |user| %>
+                        <%= user.name %><br>
+                      <% end %>
+                    </div>
+                  </div>            
+                </div>
+                <div class="mdl-dialog__actions">
+                  <button type="button" class="mdl-button close">close</button>                                    
+                  <%= link_to 'Edit', edit_schedule_path(schedule) , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+                </div>
+              </dialog>
               <span class="mdl-list__item-secondary-content">
                 <%= link_to schedule, method: :delete, data: { confirm: 'Are you sure?' } do %>
                   <i class="material-icons mdl-list__item-avatar">delete</i>
@@ -43,3 +88,18 @@
 <br>
 
 
+
+  
+<script>
+  var dialog = document.querySelector('dialog');
+  var showDialogButton = document.querySelector('#show-dialog');
+  if (! dialog.showModal) {
+    dialogPolyfill.registerDialog(dialog);
+  }
+  showDialogButton.addEventListener('click', function() {
+    dialog.showModal();
+  });
+  dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+  });
+</script>

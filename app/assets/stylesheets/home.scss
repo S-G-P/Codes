@@ -1,3 +1,171 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+
+.home  {
+    
+    input{
+        font-family: FontAwesome /*FontAwesomeをフォント指定*/;
+    }    
+
+    .chat-box {
+        background-color: white;
+        margin: 2em 0;
+        padding: 2em;
+        height: 600px;
+        min-height: 600px;
+        overflow:auto;
+    }    
+    .form-button {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        color: black !important;
+    }
+
+    @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
+    html,
+    body {
+      font-size: 100%;
+      font-size: 16px;
+    }
+    
+    * {
+      padding: 0;
+      margin: 0;
+      border: 0;
+      color: #888;
+      font-family: "Source Sans Pro", sans-serif;
+      font-weight: 300;
+      outline: none;
+      box-sizing: border-box;
+    }
+    
+    .padding {
+      padding: 20px;
+    }
+    
+    .clearfix {
+      display: table;
+      overflow: hidden;
+    }
+    .clearfix:before {
+      content: " ";
+      display: block;
+    }
+    
+    .font-size-small {
+      font-size: 0.7rem;
+    }
+    
+    .chat-wrapper {
+      width: 100%;
+      display: table;
+      overflow: hidden;
+    }
+    .chat-wrapper:before {
+      content: " ";
+      display: block;
+    }
+    .chat-wrapper .chat-content {
+      background-color: #fff;
+    }
+    .chat-wrapper .chat-image {
+      float: left;
+      border-radius: 50%;
+    }
+    .chat-wrapper .chat-image.chat-image-default {
+      width: 60px;
+      height: 60px;
+    }
+    .chat-wrapper .chat-message {
+      margin-bottom: 20px;
+      width: 100%;
+      display: table;
+      overflow: hidden;
+    }
+    .chat-wrapper .chat-message:before {
+      content: " ";
+      display: block;
+    }
+    .chat-wrapper .chat-message:last-of-type {
+      margin-bottom: 0;
+    }
+    .chat-wrapper .chat-message .chat-message-wrapper {
+      max-width: 70%;
+      display: table;
+      margin: 0 20px;
+      padding-top: 10px;
+      position: relative;
+    }
+    .chat-wrapper .chat-message .chat-message-wrapper:before {
+      content: " ";
+      display: block;
+      width: 0;
+      height: 0;
+      border: 12px solid transparent;
+      top: 20px;
+      position: absolute;
+      z-index: 2;
+    }
+    .chat-wrapper .chat-message .chat-message-wrapper p {
+      padding: 10px 20px;
+      color: #fff;
+      border-top: 1px solid;
+    }
+    .chat-wrapper .chat-message .chat-message-wrapper p:first-of-type {
+      border-top: 0 !important;
+    }
+    .chat-wrapper .chat-message.chat-message-recipient .chat-message-wrapper,
+    .chat-wrapper .chat-message.chat-message-recipient .chat-message-content {
+      float: left;
+    }
+    .chat-wrapper .chat-message.chat-message-recipient .chat-message-wrapper:before {
+      left: -20px;
+      border-right-color: #91D98A;
+    }
+    .chat-wrapper .chat-message.chat-message-recipient p {
+      background-color: #91D98A;
+      border-top-color: #7dc576;
+    }
+    .chat-wrapper .chat-message.chat-message-sender .chat-message-wrapper,
+    .chat-wrapper .chat-message.chat-message-sender .chat-message-content {
+      float: right;
+    }
+    .chat-wrapper .chat-message.chat-message-sender .chat-message-wrapper:before {
+      right: -20px;
+      border-left-color: #8AC0D9;
+    }
+    .chat-wrapper .chat-message.chat-message-sender p {
+      background: #8AC0D9;
+      border-top-color: #76acc5;
+    }
+    .chat-wrapper .chat-message.chat-message-sender img {
+      float: right;
+    }
+    .chat-wrapper .chat-message .chat-message-content {
+      display: table;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .chat-wrapper .chat-message .chat-message-content:before {
+      content: " ";
+      display: block;
+    }
+    .chat-wrapper .chat-message .chat-details {
+      clear: both;
+      width: 100%;
+      display: table;
+      overflow: hidden;
+    }
+    .chat-wrapper .chat-message .chat-details:before {
+      content: " ";
+      display: block;
+    }
+    .chat-wrapper .chat-message .chat-details span {
+      margin-right: 4px;
+      color: #bbb;
+    }
+}
