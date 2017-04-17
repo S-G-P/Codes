@@ -29,6 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # MDL
 gem 'material_design_lite-rails', '~> 1.2'
 
+# chat
+gem 'websocket-rails'
+
 # コンソールを見やすくするためのgemファイル
 gem 'hirb'
 gem 'hirb-unicode' # => HirbのUnicode対応版。日本語が入っていても結果がずれないようになります。
