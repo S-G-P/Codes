@@ -10,67 +10,101 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">  
-    <%= f.label :title, class: "control-label col-sm-2", for: "title"%>
-    <div class="col-sm-6">
-      <%= f.text_field :title, class: "form-control", placeholder: "タイトル"%>
+
+  <div class="mdl-layout mdl-grid">
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_title">
+        <i class="material-icons">assignment_turned_in</i>
+      </label>        
+    </div>            
+    <div class="mdl-cell mdl-cell--11-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :title, class: "mdl-textfield__label", for: "title", value: "タイトル" %>
+        <%= f.text_field :title, class: "mdl-textfield__input" %>
+      </div>
+    </div>  
+
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_date_from">          
+        <i class="material-icons">date_range</i>
+      </label>                
     </div>
-  </div>
-  <div class="form-group">      
-    <div class="field">
-      <%= f.label :date_from, class: "control-label col-sm-2" %>
-      <div class="col-sm-6">
-        <%= f.datetime_select :date_from %>
+    <div class="mdl-cell mdl-cell--11-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 200px !important;">
+        <%= f.label :date_from, class: "mdl-textfield__label", for: "date_from", value: "日時（開始）"%>
+        <%= f.text_field :date_from, class: "mdl-textfield__input"%>
+      </div>
+      　〜　
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 200px !important;">
+        <%= f.label :date_to, class: "mdl-textfield__label", for: "date_to", value: "日時（終了）"%>
+        <%= f.text_field :date_to, class: "mdl-textfield__input" %>
       </div>
     </div>
-  </div>    
-  <div class="form-group">          
-    <div class="field">
-      <%= f.label :date_to, class: "control-label col-sm-2" %>
-      <div class="col-sm-6">
-        <%= f.datetime_select :date_to %>
+
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_place">                    
+        <i class="material-icons">place</i>
+      </label>        
+    </div>
+    <div class="mdl-cell mdl-cell--11-col">      
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :place, class: "mdl-textfield__label", for: "schedule_place", value: "場所"%>
+        <%= f.text_field :place, class: "mdl-textfield__input"%>
       </div>
+    </div>  
+
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_content">                              
+        <i class="material-icons">content_paste</i>
+      </label>  
     </div>
-  </div>
-  <div class="form-group">          
-    <div class="field">
-      <%= f.label :place, class: "control-label col-sm-2", for: "place" %>
-      <div class="col-sm-6">
-        <%= f.text_field :place, class: "form-control", placeholder: "場所"  %>
-      </div>        
-    </div>
-  </div>
-  <div class="form-group">    
-    <div class="field">
-      <%= f.label :content, class: "control-label col-sm-2", for: "content"  %>
-      <div class="col-sm-6">      
-        <%= f.text_area :content, class: "form-control", placeholder: "スケジュールの内容"  %>
+    <div class="mdl-cell mdl-cell--11-col">          
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :content, class: "mdl-textfield__label", for: "schedule_content", value: "内容" %>
+        <%= f.text_area :content, class: "mdl-textfield__input" %>
       </div>
+    </div>  
+
+    <div class="mdl-cell mdl-cell--1-col">
+      <label class="mdl-button mdl-js-button mdl-button--icon" >
+        <i class="material-icons">group</i>              
+      </label>
     </div>
-  </div>
-  <div class="form-group">    
-    <div class="field">
-      <div class="control-label col-sm-2">
-      </div>        
-      <div class="col-sm-6">
+    <div class="mdl-cell mdl-cell--5-col">          
+      <div>
+        未登録ユーザ        
         <%= f.fields_for :schedule_users do |su| %>
           <% if @schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
-          未登録ユーザ
-            <%= User.find(su.object.user_id).name %>
-            <%= su.check_box :user_id, {include_hidden: false, checked: false}, su.object.user_id %>
-            <br>
-          <% else %>
-          登録済みユーザ
-            <%= User.find(su.object.user_id).name %>
-            <%= su.hidden_field :id, value: su.object.id %>
-            <%= su.check_box :_destroy, {checked: true}, false, true %>
-            <br>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <%= su.check_box :user_id, {include_hidden: false, checked: false, class: "mdl-checkbox__input"}, su.object.user_id %>
+              <span class="mdl-checkbox__label"><%= User.find(su.object.user_id).name %></span>
+            </label>
           <% end %>
         <% end %>
       </div>
+    </div>      
+    <div class="mdl-cell mdl-cell--5-col">                
+      <div>
+        登録済みユーザ        
+        <%= f.fields_for :schedule_users do |su| %>
+          <% if !@schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <%= su.hidden_field :id, value: su.object.id %>        
+              <%= su.check_box :_destroy, {checked: true, class: "mdl-checkbox__input"}, false, true %>        
+              <span class="mdl-checkbox__label"><%= User.find(su.object.user_id).name %></span>
+            </label>
+          <% end %>
+        <% end %>          
+      </div>
+    </div>      
+    <div class="mdl-cell mdl-cell--12-col">                    
+      <%= link_to calendar_path , class: "mdl-button mdl-js-button mdl-button--colored" do %>    
+        戻 る
+      <% end %>
+      <%= f.submit value: " 登 録 ", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" %>
     </div>
+
   </div>
-  <div class="col-sm-offset-2">
-    <%= f.submit value: "登録", class: "btn btn-primary"%>
-  </div>
+  <!--./mdl-grid-->
 <% end %>
+

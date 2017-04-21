@@ -28,6 +28,7 @@
     dispatcher.trigger("send_message", { msg: text_input.value, user: hidden_input.value });
     e.preventDefault();
   }
+  
   dispatcher.bind("spread_message", function(data) {
     var message = document.createElement("p");
     if (data.msg == "" || data.msg == null) {

@@ -1,10 +1,32 @@
-<h1>Editing Schedule</h1>
-
-<%= render 'form' %>
-
-<div class="btn btn-primary">
-<%= link_to 'Show', @schedule %>
+<div class="form-ribbon mdl-shadow--2dp">
 </div>
-<div class="btn btn-primary">
-<%= link_to 'Back', calendar_path %>
+<div class="mdl-layout">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col">
+    </div>
+    <div class="mdl-cell mdl-cell--6-col mdl-shadow--4dp form-content">
+      <%= render 'form' %>
+    </div>
+    <div class="mdl-cell mdl-cell--3-col">
+    </div>
+  </div>
 </div>
+
+<style>
+.mdl-layout__header {
+  box-shadow: none !important;
+}
+.form-ribbon {
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    background-color: rgb(33,150,243);
+    flex-shrink: 0;
+    z-index: 0;
+}
+.form-content {
+    margin-top: 2%;
+    background: white;
+}
+
+</style>
