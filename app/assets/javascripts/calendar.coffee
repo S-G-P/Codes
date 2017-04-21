@@ -180,7 +180,7 @@ showCalendar = ->
         title: val.title
         start: val.date_from
         end: val.date_to
-        color: '#FF8A80'
+        color: val.color
         textColor: 'white'
       return
     # scheduleを追加

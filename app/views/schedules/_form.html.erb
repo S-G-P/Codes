@@ -24,21 +24,49 @@
       </div>
     </div>  
 
-    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 55px;">
       <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_date_from">          
         <i class="material-icons">date_range</i>
       </label>                
     </div>
     <div class="mdl-cell mdl-cell--11-col">
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 200px !important;">
-        <%= f.label :date_from, class: "mdl-textfield__label", for: "date_from", value: "日時（開始）"%>
-        <%= f.text_field :date_from, class: "mdl-textfield__input"%>
+      <div class="mdl-textfield mdl-js-textfield" style="inline-block;">
+        <div class="date-label">
+        開始
+        </div>
+        <%= 
+          f.datetime_select(
+            :date_from,
+            {  
+              use_month_numbers: true,
+              minute_step: 10,
+              use_two_digit_numbers: true,# 月日を2桁の値で表示
+              date_separator: '/',# 年, 月
+              datetime_separator: '　',# 日
+              time_separator: ':'# 時
+            },
+            { class: "mdl-textfield__input", style: "width: auto; display: inline-block;" })
+          %>
       </div>
-      　〜　
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 200px !important;">
-        <%= f.label :date_to, class: "mdl-textfield__label", for: "date_to", value: "日時（終了）"%>
-        <%= f.text_field :date_to, class: "mdl-textfield__input" %>
-      </div>
+    　〜　
+      <div class="mdl-textfield mdl-js-textfield">      　
+        <div class="date-label">
+        終了
+        </div>
+        <%= 
+          f.datetime_select(
+            :date_to,
+            {  
+              use_month_numbers: true,
+              minute_step: 10,
+              use_two_digit_numbers: true,# 月日を2桁の値で表示
+              date_separator: '/',# 年, 月
+              datetime_separator: '　',# 日
+              time_separator: ':'# 時
+            },
+            { class: "mdl-textfield__input", style: "width: auto; display: inline-block;" })
+          %>
+      </div>          
     </div>
 
     <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
@@ -46,7 +74,7 @@
         <i class="material-icons">place</i>
       </label>        
     </div>
-    <div class="mdl-cell mdl-cell--11-col">      
+    <div class="mdl-cell mdl-cell--11-col">
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <%= f.label :place, class: "mdl-textfield__label", for: "schedule_place", value: "場所"%>
         <%= f.text_field :place, class: "mdl-textfield__input"%>
@@ -61,9 +89,58 @@
     <div class="mdl-cell mdl-cell--11-col">          
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
         <%= f.label :content, class: "mdl-textfield__label", for: "schedule_content", value: "内容" %>
-        <%= f.text_area :content, class: "mdl-textfield__input" %>
+        <%= f.text_area :content, class: "mdl-textfield__input"%>
       </div>
-    </div>  
+    </div>
+    
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 0px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_color">
+        <i class="material-icons">color_lens</i>
+      </label>  
+    </div>
+    <div class="mdl-cell mdl-cell--11-col">          
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_f44336">
+          <%= f.radio_button :color, "#F44336" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #F44336;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_ef9a9a">
+          <%= f.radio_button :color, "#EF9A9A" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #EF9A9A;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_2196f3">
+          <%= f.radio_button :color, "#2196F3" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #2196F3;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_009688">
+          <%= f.radio_button :color, "#009688" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #009688;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_03a9f4">
+          <%= f.radio_button :color, "#03A9F4" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #03A9F4;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_ffeb3b">
+          <%= f.radio_button :color, "#FFEB3B" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #FFEB3B;">opacity</i>            
+          </span>
+      </label>
+    </div>
 
     <div class="mdl-cell mdl-cell--1-col">
       <label class="mdl-button mdl-js-button mdl-button--icon" >
@@ -72,7 +149,7 @@
     </div>
     <div class="mdl-cell mdl-cell--5-col">          
       <div>
-        未登録ユーザ        
+        予定に参加するユーザを選択してください
         <%= f.fields_for :schedule_users do |su| %>
           <% if @schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -85,7 +162,7 @@
     </div>      
     <div class="mdl-cell mdl-cell--5-col">                
       <div>
-        登録済みユーザ        
+        登録済みユーザ
         <%= f.fields_for :schedule_users do |su| %>
           <% if !@schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -103,8 +180,23 @@
       <% end %>
       <%= f.submit value: " 登 録 ", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" %>
     </div>
-
   </div>
   <!--./mdl-grid-->
 <% end %>
 
+<style>
+.date-label {
+  color: rgb(33,150,243);
+  font-size: 12px;
+  top: 4px;
+}
+
+</style>
+<script>
+$(function() {
+    $('div.mdl-select > ul > li').click(function(e) {
+        var text = $(e.target).text();
+        $(e.target).parents('.mdl-select').addClass('is-dirty').children('input').val(text);
+    });
+});
+</script>

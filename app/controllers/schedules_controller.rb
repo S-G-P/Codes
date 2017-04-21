@@ -75,7 +75,7 @@ class SchedulesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def schedule_params
-      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, :user_id, schedule_users_attributes: [:id, :schedule_id, :user_id])
+      params.require(:schedule).permit(:title, :date_from, :date_to, :place, :content, :user_id, :color, schedule_users_attributes: [:id, :schedule_id, :user_id])
     end
     
 end
