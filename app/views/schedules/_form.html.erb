@@ -133,16 +133,39 @@
             <i class="material-icons" style="font-size: 24px; color: #03A9F4;">opacity</i>
           </span>
       </label>
-      　
-      <label class="mdl-radio mdl-js-radio" for="schedule_color_ffeb3b">
-          <%= f.radio_button :color, "#FFEB3B" , class: "mdl-radio__button" %>
+      
+      <br>
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_ffc107">
+          <%= f.radio_button :color, "#FFC107" , class: "mdl-radio__button" %>
           <span class="mdl-radio__label">
-            <i class="material-icons" style="font-size: 24px; color: #FFEB3B;">opacity</i>            
+            <i class="material-icons" style="font-size: 24px; color: #FFC107;">opacity</i>            
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_795548">
+          <%= f.radio_button :color, "#795548" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #795548;">opacity</i>            
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_9e9e9e">
+          <%= f.radio_button :color, "#9E9E9E" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #9E9E9E;">opacity</i>            
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_000000">
+          <%= f.radio_button :color, "#000000" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #000000;">opacity</i>            
           </span>
       </label>
     </div>
 
-    <div class="mdl-cell mdl-cell--1-col">
+    <% if request.path_info != "/schedules/new" %>
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 20px;">
       <label class="mdl-button mdl-js-button mdl-button--icon" >
         <i class="material-icons">group</i>              
       </label>
@@ -174,6 +197,8 @@
         <% end %>          
       </div>
     </div>      
+    <% end %>
+    
     <div class="mdl-cell mdl-cell--12-col">                    
       <%= link_to calendar_path , class: "mdl-button mdl-js-button mdl-button--colored" do %>    
         戻 る
