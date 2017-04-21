@@ -1,10 +1,57 @@
-<h1>Editing Schedule</h1>
-
-<%= render 'form' %>
-
-<div class="btn btn-primary">
-<%= link_to 'Show', @schedule %>
+<style>
+.mdl-layout__header {
+  //box-shadow: none !important;
+}
+.form-ribbon {
+    position: fixed;
+    width: 100%;
+    height: 50%;
+//    background-color: #64B5F6;
+    flex-shrink: 0;
+    z-index: 0;
+    background-image: url(/assets/background-1.jpg);
+    font-size: 86px;
+    color: white;
+    text-align: center; 
+    vertical-align: text-bottom;
+}
+.form-content {
+    margin-top: 10%;
+    background: white;
+}
+.form-content:hover {
+  transition: 0.3s ease-out;
+  /* box-shadow */
+  box-shadow:0px 4px 5px 2px #afa0a2;
+  -moz-box-shadow:0px 4px 5px 2px #afa0a2;
+  -webkit-box-shadow:0px 4px 5px 2px #afa0a2;
+}
+.form-content:not( :hover ){
+  transition: 0.5s ease-out;
+}
+.card-header{
+  margin: 40px 0px 40px 20px;
+  font-size: 28px;
+  color: #9E9E9E;
+}
+</style>
+<div class="form-ribbon mdl-shadow--2dp">
+  <div style="margin-top: 100px;">
+  S C H E D U L E　　 E D I T 
+  </div>
 </div>
-<div class="btn btn-primary">
-<%= link_to 'Back', calendar_path %>
+<div class="mdl-layout">
+  <div class="mdl-grid" style="margin-bottom: 50px;">
+    <div class="mdl-cell mdl-cell--2-col">
+    </div>
+    <div class="mdl-cell mdl-cell--8-col mdl-shadow--4dp form-content">
+      <div class="card-header">
+        <i class="material-icons">label</i> スケジュール編集
+      </div>
+      <hr style="width: 50px; align: left; margin-left: 20px;">
+      <%= render 'form' %>
+    </div>
+    <div class="mdl-cell mdl-cell--2-col">
+    </div>
+  </div>
 </div>

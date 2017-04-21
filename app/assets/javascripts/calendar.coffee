@@ -115,19 +115,25 @@ showCalendar = ->
       height: responsiveHeight
       forceEventDuration: true
       dayClick: ->
-        window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/new'
+        target = $(event.target);
+        console.log(target);
+        clickDate = $(target).data('date');
+        console.log(clickDate);
+        window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/new?clickDate=' + clickDate
         return
       eventClick: (calEvent, jsEvent, view) ->
         window.location.href = window.location.href.replace(/calendar/g, 'schedules') + '/' + calEvent.id
         return
       eventMouseover: (event, jsEvent, view) ->
-        $(this).css 'border-color', 'gray'
-        $(this).css 'border-width', '1px'
         $(this).css 'cursor', 'pointer'
+        $(this).css 'box-shadow', '2px 3px 6px -1px #090a0a'
+        $(this).css '-moz-box-shadow', '2px 3px 6px -1px #090a0a'
+        $(this).css '-webkit-box-shadow', '2px 3px 6px -1px #090a0a'
         return
       eventMouseout: (event, jsEvent, view) ->
-        $(this).css 'border-color', '#999999'
-        $(this).css 'border-width', '0px'
+        $(this).css 'box-shadow', 'none'
+        $(this).css '-moz-box-shadow', 'none'
+        $(this).css '-webkit-box-shadow', 'none'
         return
       editable: true
       eventResize: (event, delta, revertFunc, jsEvent, ui, view) ->
@@ -180,7 +186,7 @@ showCalendar = ->
         title: val.title
         start: val.date_from
         end: val.date_to
-        color: '#FF8A80'
+        color: val.color
         textColor: 'white'
       return
     # scheduleを追加

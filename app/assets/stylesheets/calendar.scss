@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.floating-action-button {
+  position: fixed;
+  bottom: 5%;
+  right: 20%;
+  z-index: 3;
+}
+
 .demo-card-wide.mdl-card {
   width: 100%;
 }
@@ -9,6 +16,7 @@
   color: #fff;
   height: 60px;
   background: rgb(33,150,243);
+  
 }
 .demo-card-wide > .mdl-card__menu {
   color: #fff;
@@ -24,4 +32,19 @@
 
   width: 128px;
   height: 64px;
+}
+
+
+/* 日曜日 */
+.fc-sun {
+    color: red;
+}
+ 
+/* 土曜日 */
+.fc-sat {
+    color: blue;
+}
+
+.fc-day:hover {
+  background-color: #fcf8e3;
 }

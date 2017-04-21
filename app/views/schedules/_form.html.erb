@@ -10,67 +10,218 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">  
-    <%= f.label :title, class: "control-label col-sm-2", for: "title"%>
-    <div class="col-sm-6">
-      <%= f.text_field :title, class: "form-control", placeholder: "タイトル"%>
+
+  <div class="mdl-layout mdl-grid">
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_title">
+        <i class="material-icons">assignment_turned_in</i>
+      </label>        
+    </div>            
+    <div class="mdl-cell mdl-cell--11-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :title, class: "mdl-textfield__label", for: "title", value: "タイトル" %>
+        <%= f.text_field :title, class: "mdl-textfield__input" %>
+      </div>
+    </div>  
+
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 55px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_date_from">          
+        <i class="material-icons">date_range</i>
+      </label>                
     </div>
-  </div>
-  <div class="form-group">      
-    <div class="field">
-      <%= f.label :date_from, class: "control-label col-sm-2" %>
-      <div class="col-sm-6">
-        <%= f.datetime_select :date_from %>
+    <div class="mdl-cell mdl-cell--11-col">
+      <div class="mdl-textfield mdl-js-textfield" style="inline-block;">
+        <div class="date-label">
+        開始
+        </div>
+        <%= 
+          f.datetime_select(
+            :date_from,
+            {  
+              use_month_numbers: true,
+              minute_step: 10,
+              use_two_digit_numbers: true,# 月日を2桁の値で表示
+              date_separator: '/',# 年, 月
+              datetime_separator: '　',# 日
+              time_separator: ':'# 時
+            },
+            { class: "mdl-textfield__input", style: "width: auto; display: inline-block;" })
+          %>
+      </div>
+    　〜　
+      <div class="mdl-textfield mdl-js-textfield">      　
+        <div class="date-label">
+        終了
+        </div>
+        <%= 
+          f.datetime_select(
+            :date_to,
+            {  
+              use_month_numbers: true,
+              minute_step: 10,
+              use_two_digit_numbers: true,# 月日を2桁の値で表示
+              date_separator: '/',# 年, 月
+              datetime_separator: '　',# 日
+              time_separator: ':'# 時
+            },
+            { class: "mdl-textfield__input", style: "width: auto; display: inline-block;" })
+          %>
+      </div>          
+    </div>
+
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_place">                    
+        <i class="material-icons">place</i>
+      </label>        
+    </div>
+    <div class="mdl-cell mdl-cell--11-col">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <%= f.label :place, class: "mdl-textfield__label", for: "schedule_place", value: "場所"%>
+        <%= f.text_field :place, class: "mdl-textfield__input"%>
+      </div>
+    </div>  
+
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_content">                              
+        <i class="material-icons">content_paste</i>
+      </label>  
+    </div>
+    <div class="mdl-cell mdl-cell--11-col">          
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 500px;">
+        <%= f.label :content, class: "mdl-textfield__label", for: "schedule_content", value: "内容" %>
+        <%= f.text_area :content, class: "mdl-textfield__input", style: " height: 100px;"%>
       </div>
     </div>
-  </div>    
-  <div class="form-group">          
-    <div class="field">
-      <%= f.label :date_to, class: "control-label col-sm-2" %>
-      <div class="col-sm-6">
-        <%= f.datetime_select :date_to %>
-      </div>
+    
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 0px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" for="schedule_color">
+        <i class="material-icons">color_lens</i>
+      </label>  
     </div>
-  </div>
-  <div class="form-group">          
-    <div class="field">
-      <%= f.label :place, class: "control-label col-sm-2", for: "place" %>
-      <div class="col-sm-6">
-        <%= f.text_field :place, class: "form-control", placeholder: "場所"  %>
-      </div>        
+    <div class="mdl-cell mdl-cell--11-col">          
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_f44336">
+          <%= f.radio_button :color, "#F44336" , class: "mdl-radio__button", checked: true %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #F44336;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_ef9a9a">
+          <%= f.radio_button :color, "#EF9A9A" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #EF9A9A;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_2196f3">
+          <%= f.radio_button :color, "#2196F3" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #2196F3;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_009688">
+          <%= f.radio_button :color, "#009688" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #009688;">opacity</i>
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_03a9f4">
+          <%= f.radio_button :color, "#03A9F4" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #03A9F4;">opacity</i>
+          </span>
+      </label>
+      
+      <br>
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_ffc107">
+          <%= f.radio_button :color, "#FFC107" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #FFC107;">opacity</i>            
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_795548">
+          <%= f.radio_button :color, "#795548" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #795548;">opacity</i>            
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_9e9e9e">
+          <%= f.radio_button :color, "#9E9E9E" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #9E9E9E;">opacity</i>            
+          </span>
+      </label>
+      　
+      <label class="mdl-radio mdl-js-radio" for="schedule_color_000000">
+          <%= f.radio_button :color, "#000000" , class: "mdl-radio__button" %>
+          <span class="mdl-radio__label">
+            <i class="material-icons" style="font-size: 24px; color: #000000;">opacity</i>            
+          </span>
+      </label>
     </div>
-  </div>
-  <div class="form-group">    
-    <div class="field">
-      <%= f.label :content, class: "control-label col-sm-2", for: "content"  %>
-      <div class="col-sm-6">      
-        <%= f.text_area :content, class: "form-control", placeholder: "スケジュールの内容"  %>
-      </div>
+
+    <% if request.path_info != "/schedules/new" %>
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
+      <label class="mdl-button mdl-js-button mdl-button--icon" >
+        <i class="material-icons">group</i>              
+      </label>
     </div>
-  </div>
-  <div class="form-group">    
-    <div class="field">
-      <div class="control-label col-sm-2">
-      </div>        
-      <div class="col-sm-6">
+    <div class="mdl-cell mdl-cell--5-col" style="margin-top: 40px;">          
+      <div>
+        予定に参加するユーザを選択してください
         <%= f.fields_for :schedule_users do |su| %>
           <% if @schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
-          未登録ユーザ
-            <%= User.find(su.object.user_id).name %>
-            <%= su.check_box :user_id, {include_hidden: false, checked: false}, su.object.user_id %>
-            <br>
-          <% else %>
-          登録済みユーザ
-            <%= User.find(su.object.user_id).name %>
-            <%= su.hidden_field :id, value: su.object.id %>
-            <%= su.check_box :_destroy, {checked: true}, false, true %>
-            <br>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <%= su.check_box :user_id, {include_hidden: false, checked: false, class: "mdl-checkbox__input"}, su.object.user_id %>
+              <span class="mdl-checkbox__label"><%= User.find(su.object.user_id).name %></span>
+            </label>
           <% end %>
         <% end %>
       </div>
+    </div>      
+    <div class="mdl-cell mdl-cell--5-col"  style="margin-top: 40px;"> 
+      <div>
+        登録済みユーザ
+        <%= f.fields_for :schedule_users do |su| %>
+          <% if !@schedule.schedule_users.find_by(user_id: su.object.user_id).nil? %>
+            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+              <%= su.hidden_field :id, value: su.object.id %>        
+              <%= su.check_box :_destroy, {checked: true, class: "mdl-checkbox__input"}, false, true %>        
+              <span class="mdl-checkbox__label"><%= User.find(su.object.user_id).name %></span>
+            </label>
+          <% end %>
+        <% end %>          
+      </div>
+    </div>      
+    <% end %>
+    
+    <div class="mdl-cell mdl-cell--12-col">                    
+      <%= link_to calendar_path , class: "mdl-button mdl-js-button mdl-button--colored" do %>    
+        戻 る
+      <% end %>
+      <%= f.submit value: " 登 録 ", class: "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored" %>
     </div>
   </div>
-  <div class="col-sm-offset-2">
-    <%= f.submit value: "登録", class: "btn btn-primary"%>
-  </div>
+  <!--./mdl-grid-->
 <% end %>
+
+<style>
+.date-label {
+  color: rgb(33,150,243);
+  font-size: 12px;
+  top: 4px;
+}
+
+</style>
+<script>
+$(function() {
+    $('div.mdl-select > ul > li').click(function(e) {
+        var text = $(e.target).text();
+        $(e.target).parents('.mdl-select').addClass('is-dirty').children('input').val(text);
+    });
+});
+</script>
