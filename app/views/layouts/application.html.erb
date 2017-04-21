@@ -27,16 +27,16 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <%= link_to calendar_path, class: "mdl-navigation__link" do %>
+            <%= link_to calendar_path, class: "mdl-navigation__link", id: "mdl-navigation__link-01" do %>
               <i class="material-icons">event</i>
             <% end %>
-            <%= link_to schedules_path, class: "mdl-navigation__link" do %>
+            <%= link_to schedules_path, class: "mdl-navigation__link", id: "mdl-navigation__link-01" do %>
               <i class="material-icons">assignment</i>
             <% end %>
-            <%= link_to users_path, class: "mdl-navigation__link" do %>
+            <%= link_to users_path, class: "mdl-navigation__link", id: "mdl-navigation__link-01" do %>
               <i class="material-icons">account_box</i>        
             <% end %>
-            <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>          
+            <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link", id: "mdl-navigation__link-01" %>          
           </nav>
         </div>
       </header>

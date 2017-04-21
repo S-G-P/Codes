@@ -16,6 +16,11 @@ class SchedulesController < ApplicationController
   # GET /schedules/new
   def new
     @schedule = Schedule.new
+    d = Date.parse(request.query_parameters['clickDate'])
+    t = Time.now
+    dt = DateTime.new(d.year, d.month, d.day, t.hour, t.min, t.sec, t.zone)
+    @schedule.date_from = dt
+    @schedule.date_to = dt
   end
 
   # GET /schedules/1/edit

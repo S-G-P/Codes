@@ -1,3 +1,15 @@
+<script>
+function getdata(){
+    if(window.location.search){
+        /* URLの「?」以降のパラメータを変数nに代入 */
+        var n=window.location.search.substring(1,window.location.search.length);
+        /* テキストボックスにパラメータを表示 */
+        document.form3.elements["getpram"].value=n;
+    }
+}
+/* オンロード時に実行 */
+window.onload=getdata;
+</script>
 <style>
 .mdl-layout__header {
   //box-shadow: none !important;
