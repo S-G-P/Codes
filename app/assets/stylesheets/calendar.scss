@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.floating-action-button {
+  position: fixed;
+  bottom: 5%;
+  right: 20%;
+  z-index: 3;
+}
+
 .demo-card-wide.mdl-card {
   width: 100%;
 }

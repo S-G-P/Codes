@@ -87,9 +87,9 @@
       </label>  
     </div>
     <div class="mdl-cell mdl-cell--11-col">          
-      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 500px;">
         <%= f.label :content, class: "mdl-textfield__label", for: "schedule_content", value: "内容" %>
-        <%= f.text_area :content, class: "mdl-textfield__input"%>
+        <%= f.text_area :content, class: "mdl-textfield__input", style: " height: 100px;"%>
       </div>
     </div>
     
@@ -165,12 +165,12 @@
     </div>
 
     <% if request.path_info != "/schedules/new" %>
-    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 20px;">
+    <div class="mdl-cell mdl-cell--1-col" style="margin-top: 30px;">
       <label class="mdl-button mdl-js-button mdl-button--icon" >
         <i class="material-icons">group</i>              
       </label>
     </div>
-    <div class="mdl-cell mdl-cell--5-col">          
+    <div class="mdl-cell mdl-cell--5-col" style="margin-top: 40px;">          
       <div>
         予定に参加するユーザを選択してください
         <%= f.fields_for :schedule_users do |su| %>
@@ -183,7 +183,7 @@
         <% end %>
       </div>
     </div>      
-    <div class="mdl-cell mdl-cell--5-col">                
+    <div class="mdl-cell mdl-cell--5-col"  style="margin-top: 40px;"> 
       <div>
         登録済みユーザ
         <%= f.fields_for :schedule_users do |su| %>

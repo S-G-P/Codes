@@ -1,81 +1,111 @@
-<div class="mdl-layout">
-  <div class="mdl-grid">
-    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--10-col-desktop mdl-cell--12-col-phone">
-      
-      <p id="notice"><%= notice %></p>
-      <style>
-      .card-wide.mdl-card {
-        width: 1024px;
-      }
-      .card-wide > .mdl-card__title {
-        color: #fff;
-        height: 250px;
-      }
-      .card-wide > .mdl-card__menu {
-        color: #fff;
-      }
-      </style>
-      <script>
-        $(function(){
-          schedule_color = $("#schedule_color_a").val();
-          $(".mdl-card__title").css("background-color", schedule_color)
-        })
-      </script>
-      <%= hidden_field :schedule_color, :a, :value => @schedule.color %>
-      <div class="card-wide mdl-card mdl-shadow--2dp">
-        <div class="mdl-card__title">
-          <h2 class="mdl-card__title-text"><%= @schedule.title %><br></h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--1-col">
-              <i class="material-icons">date_range</i>
-            </div>
-            <div class="mdl-cell mdl-cell--10-col">
-              <%= @schedule.date_from %> 〜 <%= @schedule.date_to %><br>              
-            </div>
-          </div>  
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--1-col">
-              <i class="material-icons">place</i>              
-            </div>
-            <div class="mdl-cell mdl-cell--10-col">
-              <%= @schedule.place %><br>
-            </div>
-          </div>  
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--1-col">
-              <i class="material-icons">content_paste</i>              
-            </div>
-            <div class="mdl-cell mdl-cell--10-col">
-              <%= @schedule.content %><br>                        
-            </div>
-          </div>            
-          <div class="mdl-grid">
-            <div class="mdl-cell mdl-cell--1-col">
-              <i class="material-icons">group</i>              
-            </div>
-            <div class="mdl-cell mdl-cell--10-col">
-              <% @schedule.users.each do |user| %>
-                <%= user.name %><br>
-              <% end %>
-            </div>
-          </div>            
-        </div>
-        
-        <div class="mdl-card__actions mdl-card--border">
-          <%= link_to 'Edit', edit_schedule_path(@schedule) , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
-          <%= link_to 'Back', calendar_path , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" , style: "color: black"%>
-        </div>
-        <div class="mdl-card__menu">
-          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-            <i class="material-icons">share</i>
-          </button>
-        </div>
+<style>
+.card-wide.mdl-card {
+ width: 100%;
+}
+.card-wide.mdl-card:hover {
+  transition: 0.3s ease-out;
+  /* box-shadow */
+  box-shadow:0px 4px 5px 2px #afa0a2;
+  -moz-box-shadow:0px 4px 5px 2px #afa0a2;
+  -webkit-box-shadow:0px 4px 5px 2px #afa0a2;
+}
+.card-wide.mdl-card:not( :hover ){
+  transition: 0.5s ease-out;
+}
+.card-wide > .mdl-card__title {
+  color: #fff;
+  height: 150px;
+}
+.card-wide > .mdl-card__menu {
+  color: #fff;
+}
+.form-ribbon {
+    position: fixed;
+    width: 100%;
+    height: 50%;
+//    background-color: #64B5F6;
+    flex-shrink: 0;
+    z-index: 0;
+    background-image: url(/assets/background-2.jpg);
+    font-size: 86px;
+    color: white;
+    text-align: center; 
+    vertical-align: text-bottom;
+}
+</style>
+<script>
+  $(function(){
+    schedule_color = $("#schedule_color_a").val();
+    $(".mdl-card__title").css("background-color", schedule_color)
+  })
+</script>
+<div class="form-ribbon mdl-shadow--2dp">
+  <div style="margin-top: 100px;">
+  S C H E D U L E　　 D E T A I L
+  </div>
+</div>
+
+<div class="mdl-grid" style="margin-top: 10%;">
+  <div class="mdl-cell mdl-cell--2-col-desktop">
+  </div>
+  <div class="mdl-cell mdl-cell--8-col-desktop mdl-cell--12-col-phone">
+    
+    <p id="notice"><%= notice %></p>
+    <%= hidden_field :schedule_color, :a, :value => @schedule.color %>
+    <div class="card-wide mdl-card mdl-shadow--2dp">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text"><%= @schedule.title %><br></h2>
       </div>
-    </div>    
-    <div class="mdl-cell mdl-grid-no-spacing mdl-cell--2-col-desktop mdl-cell--12-col-phone">
+      <div class="mdl-card__supporting-text">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--1-col">
+            <i class="material-icons">date_range</i>
+          </div>
+          <div class="mdl-cell mdl-cell--10-col">
+            <%= @schedule.date_from %> 〜 <%= @schedule.date_to %><br>              
+          </div>
+        </div>  
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--1-col">
+            <i class="material-icons">place</i>              
+          </div>
+          <div class="mdl-cell mdl-cell--10-col">
+            <%= @schedule.place %><br>
+          </div>
+        </div>  
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--1-col">
+            <i class="material-icons">content_paste</i>              
+          </div>
+          <div class="mdl-cell mdl-cell--10-col">
+            <%= @schedule.content %><br>                        
+          </div>
+        </div>            
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--1-col">
+            <i class="material-icons">group</i>              
+          </div>
+          <div class="mdl-cell mdl-cell--10-col">
+            <% @schedule.users.each do |user| %>
+              <%= user.name %><br>
+            <% end %>
+          </div>
+        </div>            
+      </div>
       
-    </div>          
+      <div class="mdl-card__actions mdl-card--border">
+        <%= link_to 'Edit', edit_schedule_path(@schedule) , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" %>
+        <%= link_to 'Back', calendar_path , class: "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" , style: "color: black"%>
+      </div>
+      <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+          <i class="material-icons">share</i>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+  
+  <div class="mdl-cell mdl-cell--2-col-desktop">
   </div>
 </div>
