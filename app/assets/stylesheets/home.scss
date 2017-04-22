@@ -12,7 +12,7 @@
         position: fixed;
         left: 59%;
         top: 8%;
-        background-color: white;
+        background-color: #fff8e1;
         margin: 2em 0;
         padding: 2em;
         height: 74%;
@@ -20,6 +20,7 @@
         width: 40%;
         overflow: hidden;
         overflow-y: scroll;
+        z-index: 4;
     }    
     .chat-box:hover {
       transition: 0.3s ease-out;      

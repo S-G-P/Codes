@@ -96,6 +96,196 @@
   <!-- ./mdl-layout -->
 </div>
 <!-- ./main -->
-<style>
 
-</style>
+<div class="floating-action-button">
+  <div class="mdl-card-menu">
+    <button id="fab" 
+      class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--8dp"
+      style="background-color: #2196f3">
+      <i class="material-icons">message</i>
+    </button>
+  </div>
+</div>
+
+<div class="home" id="msg_box">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col mdl-shadow--2dp chat-box" id="chat-box">
+      <div class='chat-wrapper'>
+        <div class='chat-message padding'>
+          <!--ここにチャットのメッセージが入る-->
+        </div>
+        <form id="form" class="form-button">
+          <input id="hidden_input" type="hidden" value="<%= current_user.name %>">
+          <div class="mdl-textfield mdl-js-textfield">
+            <input class="mdl-textfield__input" type="text" id="text_input">
+            <label class="mdl-textfield__label" for="text_input">Say something...</label>
+          </div>
+          <button type="submit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+            <i class="material-icons">send</i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var dispatcher = new WebSocketRails("s-g-p-gee-awa.c9users.io/websocket"); //ドメインは適宜変える
+  var form = document.getElementById("form");
+  var text_input = document.getElementById("text_input");
+  var msg_box = document.getElementById("msg_box");
+  console.log(dispatcher);
+
+  /* FORMボタン押下時の処理 */
+  form.onsubmit = function(e){
+    dispatcher.trigger("send_message", { msg: text_input.value, user: hidden_input.value });
+    e.preventDefault();
+  }
+  
+  /* 画面初期表示時はチャットウィンドウは非表示*/
+  var chatBoxOpenFlg = false;
+  $(function(){
+    $('#msg_box').hide();
+    chatBoxOpenFlg = false;        
+  })
+  
+  /* FABをクリックしてチャット画面を表示*/
+  $('.floating-action-button').click(function(){
+    $('#msg_box').toggle(500);
+    if (chatBoxOpenFlg == true) {
+      chatBoxOpenFlg = false;
+    } else {
+      chatBoxOpenFlg = true;
+    }
+    $(".floating-action-button").css("animation","none");      
+  });
+
+  
+  var tagFocusFlg = true;
+  $(window).bind("focus",function(){
+  　//フォーカスが当たったらフラグを設定      
+    tagFocusFlg = true;
+  }).bind("blur",function(){
+　  //フォーカスが外れたらフラグを解除    
+    tagFocusFlg = false;
+   });
+  
+  
+  dispatcher.bind("spread_message", function(data) {
+    var message = document.createElement("p");
+    if (data.msg == "" || data.msg == null) {
+      data.msg = "　";
+    }
+    
+    message.textContent = data.msg;
+    var user_name = data.user;
+    if (user_name != hidden_input.value) {
+      // 受信したユーザが自分意外であれば左に表示
+      if ( $(".chat-message-localisation:last").text() != user_name) {
+
+        var div = $('<div class="chat-message chat-message-recipient"></div>');
+        $(".padding").append(div);
+        
+        div = $("<img class='chat-image chat-image-default' src='/assets/satomi-01.jpg' />");
+        $(".chat-message:last").append(div);
+        
+        div = $("<div class='chat-message-wrapper'></div>");
+        $(".chat-image:last").after(div);
+        
+        div = $("<div class='chat-message-content'></div>");
+        $(".chat-message-wrapper:last").append(div);
+        
+        $(".chat-message-content:last").append(message);
+        
+        div = $("<div class='chat-details'></div>");
+        $(".chat-message-content:last").after(div);
+        
+        div = $("<span class='chat-message-localisation font-size-small'>" + user_name + "</span>");
+        $(".chat-details:last").append(div);
+  
+        div = $("<span class='chat-message-read-status font-size-small'>- Read</span>");
+        $(".chat-details:last").append(div);
+      } else {
+        $(".chat-message-content:last").append(message);        
+      }
+      
+      // アクティブタブを開いていない場合、または#chat-boxを開いていない場合、通知処理を実行
+      if (!tagFocusFlg || !chatBoxOpenFlg) {
+        Notification.requestPermission(function (status) {
+          // 通知の許可を求める      
+          if (Notification.permission !== status) {
+            Notification.permission = status;
+          }
+        });
+        console.log(tagFocusFlg);
+        console.log(chatBoxOpenFlg);
+        // 通知をキックする
+        var n = new Notification('SGP', {tag: 'soManyNotification', icon: '/assets/satomi-01.jpg', body: data.msg});
+        // 通知の持続時間は3秒
+        setTimeout(n.close.bind(n), 3000);
+
+        n.onclick = function () {
+          $(window).focus();
+        };
+        
+        // FABをぷるぷるさせる
+        if(!chatBoxOpenFlg) {
+          $(".floating-action-button").css("animation", "skew 2.0s linear infinite")
+        }
+      }
+        
+    } else {
+      // 受信したユーザが自分であれば右に表示      
+      if ( $(".chat-message-localisation:last").text() != user_name) {
+
+        var div = $('<div class="chat-message chat-message-sender"></div>');
+        $(".padding").append(div);
+        
+        div = $("<img class='chat-image chat-image-default' src='/assets/mokomichi.jpg' />");
+        $(".chat-message:last").append(div);
+        
+        div = $("<div class='chat-message-wrapper'></div>");
+        $(".chat-image:last").after(div);
+        
+        div = $("<div class='chat-message-content'></div>");
+        $(".chat-message-wrapper:last").append(div);
+        
+        $(".chat-message-content:last").append(message);
+        
+        div = $("<div class='chat-details'></div>");
+        $(".chat-message-content:last").after(div);
+        
+        div = $("<span class='chat-message-localisation font-size-small'>" + user_name + "</span>");
+        $(".chat-details:last").append(div);
+  
+        div = $("<span class='chat-message-read-status font-size-small'>- Read</span>");
+        $(".chat-details:last").append(div);
+      } else {
+        $(".chat-message-content:last").append(message);        
+      }
+  
+    }
+    
+    // 自動でスクロールさせる
+    var position = $(".chat-message-content p:last").offset().top;
+    position *= position;
+    $('#chat-box').scrollTop(position);
+    
+    // 送信後はinputformの値をクリア
+    $('#text_input').val("");
+    
+  });
+  
+  $('#chat-box').mouseover(function(){
+      $('#chat-box').css('box-shadow','1px 3px 6px 3px #ada6a7');
+  })
+  $('#chat-box').mouseout(function(){
+      $('#chat-box').css('box-shadow','0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)');
+  })
+  $('#text_input').mouseover(function(){
+      $('#chat-box').css('box-shadow','1px 3px 6px 3px #ada6a7');
+  })
+  $('#text_input').mouseout(function(){
+      $('#chat-box').css('box-shadow','0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)');
+  })
+</script>
