@@ -7,6 +7,10 @@ class CalendarController < ApplicationController
   before_action :set_schedule, only: [:show, :edit, :update, :destroy]  
   before_action :authenticate_user!
   
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  protect_from_forgery with: :exception
+  
   # GET /calendar
   def index
     @schedules = current_user.schedules.all
