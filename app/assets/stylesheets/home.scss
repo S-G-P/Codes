@@ -21,6 +21,12 @@
         overflow: hidden;
         overflow-y: scroll;
     }    
+    .chat-box:hover {
+      transition: 0.3s ease-out;      
+    }
+    .chat-box:not(:hover) {
+      transition: 0.5s ease-out;      
+    }
     .form-button {
         position: fixed;
         bottom: 100px;
@@ -169,5 +175,10 @@
     .chat-wrapper .chat-message .chat-details span {
       margin-right: 4px;
       color: #bbb;
+    }
+    
+    p {
+      max-width: 200px;
+      word-wrap: break-word;
     }
 }
