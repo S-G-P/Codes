@@ -1,13 +1,23 @@
+<div class="floating-action-button">
+  <div class="mdl-card-menu">
+    <button id="fab" 
+      class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--8dp"
+      style="background-color: #2196f3">
+      <i class="material-icons">message</i>
+    </button>
+  </div>
+</div>
+
 <div class="home" id="msg_box">
   <div class="mdl-grid">
-    <div class="mdl-cell mdl-cell--12-col mdl-shadow--2dp chat-box">
+    <div class="mdl-cell mdl-cell--12-col mdl-shadow--2dp chat-box" id="chat-box">
       <div class='chat-wrapper'>
         <div class='chat-message padding'>
           <!--ここにチャットのメッセージが入る-->
         </div>
       </div>
-    </div>        
-  </div>  
+    </div>
+  </div>
   
   <form id="form" class="form-button">
     <input id="hidden_input" type="hidden" value="<%= current_user.name %>">
@@ -15,9 +25,12 @@
       <input class="mdl-textfield__input" type="text" id="text_input">
       <label class="mdl-textfield__label" for="text_input">Say something...</label>
     </div>
-    <button type="submit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored"><i class="material-icons">send</i></button>
+    <button type="submit" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect mdl-button--colored">
+      <i class="material-icons">send</i>
+    </button>
   </form>
 </div>
+
 <script>
   var dispatcher = new WebSocketRails("s-g-p-gee-awa.c9users.io/websocket"); //ドメインは適宜変える
   var form = document.getElementById("form");
@@ -39,8 +52,7 @@
     if (user_name != hidden_input.value) {
       // 受信したユーザが自分意外であれば左に表示
       if ( $(".chat-message-localisation:last").text() != user_name) {
-        console.log($(".chat-message-localisation:last"))
-        
+
         var div = $('<div class="chat-message chat-message-recipient"></div>');
         $(".padding").append(div);
         
@@ -66,11 +78,19 @@
       } else {
         $(".chat-message-content:last").append(message);        
       }
+      Notification.requestPermission(function (status) {
+        // 通知の許可を求める      
+        if (Notification.permission !== status) {
+          Notification.permission = status;
+        }
+      });
+      // 通知をキックする
+      var n = new Notification('SGP', {tag: 'soManyNotification', icon: '/assets/satomi-01.jpg', body: data.msg});
+
     } else {
       // 受信したユーザが自分であれば右に表示      
       if ( $(".chat-message-localisation:last").text() != user_name) {
-        console.log($(".chat-message-localisation:last"))
-        
+
         var div = $('<div class="chat-message chat-message-sender"></div>');
         $(".padding").append(div);
         
@@ -94,8 +114,29 @@
         div = $("<span class='chat-message-read-status font-size-small'>- Read</span>");
         $(".chat-details:last").append(div);
       } else {
-        $(".chat-message-content:last").append(message);        
+      $(".chat-message-content:last").append(message);        
       }
+  
     }
+    
+    // 自動でスクロールさせる
+    var position = $(".chat-message-content p:last").offset().top;
+    position *= position;
+    $('#chat-box').scrollTop(position);
+    
   });
+  
+  /* 画面初期表示時はチャットウィンドウは非表示*/
+  $(function(){
+    $('#msg_box').hide();    
+  })
+
+  /* FABをクリックしてチャット画面を表示*/
+  $('.floating-action-button').click(function(){
+      $('#msg_box').toggle(500);
+  });
+  
 </script>
+
+<style>
+</style>
