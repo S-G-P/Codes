@@ -8,7 +8,6 @@
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag "https://fonts.googleapis.com/icon?family=Material+Icons" %>
   <%= stylesheet_link_tag "https://code.getmdl.io/1.3.0/material.blue-red.min.css" %>
-  <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Roboto:400,300,100,500" %>
   <%= favicon_link_tag('favicon.ico') %>
   <%= favicon_link_tag('apple-touch-icon-180x180.png',
                      {:rel => 'apple-touch-icon',
@@ -22,7 +21,7 @@
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <!-- Title -->
-          <span class="mdl-layout-title">SGP</span>
+          <span class="mdl-layout-title">S G P　　 C A L E N D A R</span>
           <!-- Add spacer, to align navigation to the right -->
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
@@ -33,7 +32,7 @@
             <%= link_to schedules_path, class: "mdl-navigation__link", id: "mdl-navigation__link-01" do %>
               <i class="material-icons">assignment</i>
             <% end %>
-            <%= link_to users_path, class: "mdl-navigation__link", id: "mdl-navigation__link-01" do %>
+            <%= link_to edit_user_registration_path, class: "mdl-navigation__link", id: "mdl-navigation__link-01" do %>
               <i class="material-icons">account_box</i>        
             <% end %>
             <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link", id: "mdl-navigation__link-01" %>          
@@ -41,16 +40,16 @@
         </div>
       </header>
       <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">SGP</span>
+        <span class="mdl-layout-title">S G P</span>
         <nav class="mdl-navigation">
           <%= link_to calendar_path, class: "mdl-navigation__link" do %>
-              <i class="material-icons">event</i>カレンダー
+              <i class="material-icons">event</i>　カレンダー
             <% end %>
             <%= link_to schedules_path, class: "mdl-navigation__link" do %>
-              <i class="material-icons">assignment</i>スケジュール一覧
+              <i class="material-icons">assignment</i>　スケジュール一覧
             <% end %>
-            <%= link_to users_path, class: "mdl-navigation__link" do %>
-              <i class="material-icons">account_box</i>ユーザ情報
+            <%= link_to edit_user_registration_path, class: "mdl-navigation__link" do %>
+              <i class="material-icons">account_box</i>　ユーザ情報
             <% end %>
           <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, class: "mdl-navigation__link" %>
         </nav>

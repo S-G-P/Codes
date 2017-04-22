@@ -25,7 +25,6 @@
         color: black !important;
     }
 
-    @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
     html,
     body {
       font-size: 100%;
@@ -77,8 +76,8 @@
       border-radius: 50%;
     }
     .chat-wrapper .chat-image.chat-image-default {
-      width: 60px;
-      height: 60px;
+      width: 100px;
+      height: 100px;
     }
     .chat-wrapper .chat-message {
       margin-bottom: 20px;
