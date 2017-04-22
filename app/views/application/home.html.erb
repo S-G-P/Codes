@@ -42,6 +42,33 @@
     e.preventDefault();
   }
   
+  /* 画面初期表示時はチャットウィンドウは非表示*/
+  $(function(){
+    $('#msg_box').hide();
+    chatBoxOpenFlg = false;      
+  })
+  
+  /* FABをクリックしてチャット画面を表示*/
+  $('.floating-action-button').click(function(){
+    $('#msg_box').toggle(500);
+    if (chatBoxOpenFlg == true) {
+      chatBoxOpenFlg = false;
+    } else {
+      chatBoxOpenFlg = true;
+    }
+    $(".floating-action-button").css("animation","none");      
+  });
+
+  
+  var tagFocusFlg = false;
+  $(window).bind("focus",function(){
+  　//フォーカスが当たったらフラグを設定      
+    tagFocusFlg = true;
+  }).bind("blur",function(){
+　  //フォーカスが外れたらフラグを解除    
+    tagFocusFlg = false;
+   });
+  
   dispatcher.bind("spread_message", function(data) {
     var message = document.createElement("p");
     if (data.msg == "" || data.msg == null) {
@@ -79,15 +106,32 @@
       } else {
         $(".chat-message-content:last").append(message);        
       }
-      Notification.requestPermission(function (status) {
-        // 通知の許可を求める      
-        if (Notification.permission !== status) {
-          Notification.permission = status;
-        }
-      });
-      // 通知をキックする
-      var n = new Notification('SGP', {tag: 'soManyNotification', icon: '/assets/satomi-01.jpg', body: data.msg});
+      
+      // アクティブタブを開いていない場合、または#chat-boxを開いていない場合、通知処理を実行
+      if ((!tagFocusFlg) || (!chatBoxOpenFlg)) {
+        Notification.requestPermission(function (status) {
+          // 通知の許可を求める      
+          if (Notification.permission !== status) {
+            Notification.permission = status;
+          }
+        });
+        console.log(tagFocusFlg);
+        console.log(chatBoxOpenFlg);
+        // 通知をキックする
+        var n = new Notification('SGP', {tag: 'soManyNotification', icon: '/assets/satomi-01.jpg', body: data.msg});
+        // 通知の持続時間は3秒
+        setTimeout(n.close.bind(n), 3000);
 
+        n.onclick = function () {
+          $(window).focus();
+        };
+        
+        // FABをぷるぷるさせる
+        if(!chatBoxOpenFlg) {
+          $(".floating-action-button").css("animation", "skew 2.0s linear infinite")
+        }
+      }
+        
     } else {
       // 受信したユーザが自分であれば右に表示      
       if ( $(".chat-message-localisation:last").text() != user_name) {
@@ -115,7 +159,7 @@
         div = $("<span class='chat-message-read-status font-size-small'>- Read</span>");
         $(".chat-details:last").append(div);
       } else {
-      $(".chat-message-content:last").append(message);        
+        $(".chat-message-content:last").append(message);        
       }
   
     }
@@ -127,32 +171,19 @@
     
     // 送信後はinputformの値をクリア
     $('#text_input').val("");
-  });
-  
-  /* 画面初期表示時はチャットウィンドウは非表示*/
-  $(function(){
-    $('#msg_box').hide();    
-  })
-
-  /* FABをクリックしてチャット画面を表示*/
-  $('.floating-action-button').click(function(){
-      $('#msg_box').toggle(500);
-  });
-  
-  $('#chat-box').mouseover(function(){
-      $('#chat-box').css('box-shadow','1px 3px 6px 3px #ada6a7');
-  })
-  $('#chat-box').mouseout(function(){
-      $('#chat-box').css('box-shadow','0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)');
-  })
-  $('#text_input').mouseover(function(){
-      $('#chat-box').css('box-shadow','1px 3px 6px 3px #ada6a7');
-  })
-  $('#text_input').mouseout(function(){
-      $('#chat-box').css('box-shadow','0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)');
-  })
-  
+    });
+    
+    $('#chat-box').mouseover(function(){
+        $('#chat-box').css('box-shadow','1px 3px 6px 3px #ada6a7');
+    })
+    $('#chat-box').mouseout(function(){
+        $('#chat-box').css('box-shadow','0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)');
+    })
+    $('#text_input').mouseover(function(){
+        $('#chat-box').css('box-shadow','1px 3px 6px 3px #ada6a7');
+    })
+    $('#text_input').mouseout(function(){
+        $('#chat-box').css('box-shadow','0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12)');
+    })
+    
 </script>
-
-<style>
-</style>
