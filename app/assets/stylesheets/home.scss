@@ -2,8 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300);
-
 .home  {
     
     input{
@@ -11,17 +9,22 @@
     }    
 
     .chat-box {
+        position: fixed;
+        left: 59%;
+        top: 8%;
         background-color: white;
         margin: 2em 0;
         padding: 2em;
-        height: 600px;
-        min-height: 600px;
-        overflow:auto;
+        height: 74%;
+        min-height: 74%;
+        width: 40%;
+        overflow: hidden;
+        overflow-y: scroll;
     }    
     .form-button {
         position: fixed;
-        bottom: 10px;
-        right: 10px;
+        bottom: 100px;
+        right: 2%;
         color: black !important;
     }
 
